@@ -29,5 +29,5 @@ Route::middleware([
 });
 
 Route::controller(AdminController::class)->group(function () {
-    Route::get('/orders/{id}', 'show');
+    Route::get('/admin', 'index')->name('admin.index');
 });
