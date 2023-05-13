@@ -33,9 +33,12 @@
             @endif
 
             <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+           <div class="w-full bg-slate-50">
+                <!-- Page Content -->
+                <main>
+                    {{ $slot }}
+                </main>
+            </div>
         </div>
 
         @stack('modals')
