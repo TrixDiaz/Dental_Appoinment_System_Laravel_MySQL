@@ -1,4 +1,5 @@
 <x-app-layout>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Dashboard') }}
@@ -28,7 +29,7 @@
                         <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
                             <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
                                 <div class="overflow-hidden">
-                                    <table class="min-w-full">
+                                    <table class="min-w-full" id="myTable">
                                         <thead class="bg-white border-b">
                                             <tr>
                                                 <th scope="col"
@@ -163,4 +164,14 @@
             </div>
         </div>
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#myTable').DataTable();
+        });
+    </script>
+
+
 </x-app-layout>
