@@ -31,8 +31,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         $events = DB::table('events')
             ->join('users', 'events.name', '=', 'users.name')
             ->select('users.*', 'events.*')
-            ->limit(3)
             ->where('events.name', '=', $user)
+            ->limit(3)
             ->get();
         return view('dashboard',compact('events'));
     })->name('dashboard');

@@ -15,8 +15,9 @@ class AdminController extends Controller
 {
     public function index()
     {
+        $events = Event::all();
         if (Auth::user()->role === 'admin') {
-            return view('admin.index');
+            return view('admin.index',compact('events'));
         }
         return view('error.404');
     }
@@ -30,12 +31,13 @@ class AdminController extends Controller
     }
 
     public function store(Request $request){
-        $user = Auth::user()->name;
+       
         $validated = $request->validate([
             "reason" => ['required'],
             "time_start" => ['required'],
+            "time_end" => ['nullable'],
             "date" => ['required'],
-            "name" => $user,
+            "name" => ['required'],
             "created_at" => Carbon::now(),
             "updated_at" => Carbon::now(),
         ]);

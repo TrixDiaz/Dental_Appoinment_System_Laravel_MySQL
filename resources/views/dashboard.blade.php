@@ -72,7 +72,7 @@
                                                         class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                                         {{ $event->time_start }}
                                                     </td>
-                                                    <td
+                                                    <td 
                                                         class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                                         {{ $event->time_end }}
                                                     </td>
@@ -105,6 +105,7 @@
                 <form action="/store" method="POST"
                     onsubmit="return confirm('Are you sure? There is No Cancellation.');">
                     @csrf
+                    <input type="text" name="name" value="{{ $user = Auth::user()->name; }}" hidden>
                     {{-- Appointment Reason --}}
                     <label class="block mt-5">
                         <span class="block text-md text-slate-700 font-semibold">Appointment Reason</span>
