@@ -25,9 +25,13 @@ class AdminController extends Controller
     public function users(){
         $users = User::all();
         if (Auth::user()->role === 'admin') {
-            return view('admin.users',compact('users'));
+            return view('admin.user.index',compact('users'));
         }
         return view('error.404');
+    }
+
+    public function usersEdit(){
+        return view('admin.user.edit');
     }
 
     public function store(Request $request){

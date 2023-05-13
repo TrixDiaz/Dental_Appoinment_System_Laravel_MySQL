@@ -40,6 +40,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
 Route::controller(AdminController::class)->group(function () {
     Route::get('/admin', 'index')->name('admin.index');
-    Route::get('/adminUsers', 'users')->name('admin.users');
+    Route::get('/adminUsers', 'users')->name('admin.user.index');
+    Route::get('/adminUsersEdit', 'usersEdit')->name('admin.user.edit');
     Route::post('/store', 'store')->name('admin.store');
 });

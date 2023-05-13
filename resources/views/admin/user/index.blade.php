@@ -52,7 +52,7 @@
                                                 <td>
                                                     <div class="flex justify-end">
                                                         <div class="block mx-2">
-                                                            <a href="" class="text-yellow-400 mx-3 flex">
+                                                            <a href="{{ route('admin.user.edit', $user->id) }}" class="text-yellow-400 mx-3 flex">
                                                                 <svg fill="#FACC15" class="w-5 h-5 mx-1"
                                                                     viewBox="0 0 24 24"
                                                                     xmlns="http://www.w3.org/2000/svg">
@@ -65,7 +65,7 @@
                                                         </div>
 
                                                         <form class="text-red-500 flex mx-3" method="POST"
-                                                            action="{{ route('admin.users', $user->id) }}"
+                                                            action=""
                                                             onsubmit="return confirm('Are you sure?');">
                                                             @csrf
                                                             @method('DELETE')

@@ -55,7 +55,7 @@
                 <nav :class="{ 'block': open, 'hidden': !open }"
                     class="flex-grow px-4 pb-4 md:block md:pb-0 md:overflow-y-auto">
                     <x-admin-link :href="route('admin.index')" :active="request()->routeIs('admin.index')">Home</x-admin-link>
-                    <x-admin-link :href="route('admin.users')" :active="request()->routeIs('admin.users')">Users</x-admin-link>
+                    <x-admin-link :href="route('admin.user.index')" :active="request()->routeIs('admin.user.index')">Users</x-admin-link>
 
                     <div @click.away="open = false" class="relative" x-data="{ open: false }">
                         <button @click="open = !open"

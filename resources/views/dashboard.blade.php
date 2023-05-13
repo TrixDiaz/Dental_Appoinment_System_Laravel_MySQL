@@ -34,6 +34,10 @@
                                             <tr>
                                                 <th scope="col"
                                                     class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                    #
+                                                </th>
+                                                <th scope="col"
+                                                    class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                                     Reason
                                                 </th>
                                                 <th scope="col"
@@ -63,6 +67,10 @@
                                                 <tr class="bg-gray-100 border-b">
                                                     <td
                                                         class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                        {{ $event->id }}
+                                                    </td>
+                                                    <td
+                                                        class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                                         {{ $event->reason }}
                                                     </td>
                                                     <td
@@ -87,7 +95,6 @@
                                                     </td>
                                                 </tr>
                                             @endforeach
-
                                         </tbody>
                                     </table>
                                 </div>
