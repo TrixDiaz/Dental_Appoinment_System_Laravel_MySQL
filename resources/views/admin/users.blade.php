@@ -23,6 +23,9 @@
                                             <th scope="col"
                                                 class="px-6 py-3 text-left text-xs font-medium text-slate-900 uppercase tracking-wider">
                                                 Email</th>
+                                            <th scope="col"
+                                                class="px-6 py-3 text-left text-xs font-medium text-slate-900 uppercase tracking-wider">
+                                                Role</th>
                                             <th scope="col" class="relative px-6 py-3">
                                                 <span class="sr-only">Edit</span>
                                             </th>
@@ -41,6 +44,11 @@
                                                         {{ $user->email }}
                                                     </div>
                                                 </td>
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    <div class="flex items-center">
+                                                        {{ $user->role }}
+                                                    </div>
+                                                </td>
                                                 <td>
                                                     <div class="flex justify-end">
                                                         <div class="block mx-2">
@@ -56,8 +64,8 @@
                                                             </a>
                                                         </div>
 
-                                                        <form class="text-red-500 flex mx-1" method="POST"
-                                                            {{-- action="{{ route('admin.users.destroy', $user->id) }}" --}}
+                                                        <form class="text-red-500 flex mx-3" method="POST"
+                                                            action="{{ route('admin.users', $user->id) }}"
                                                             onsubmit="return confirm('Are you sure?');">
                                                             @csrf
                                                             @method('DELETE')
