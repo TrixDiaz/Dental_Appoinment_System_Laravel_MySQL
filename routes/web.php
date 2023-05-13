@@ -1,6 +1,7 @@
 <?php
 
-use App\Models\Event;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\AdminController;
 
@@ -19,9 +20,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])->group(function () {
+// Route::get('dashboard', function () {
+//     $events = DB::select('select * from events where active = ?');
+//     return view('dashboard');
+// });
+
+Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');})->name('dashboard');
+        $user = Auth::User()->name;
+        $events = DB::table('events')
+            ->join('users', 'events.name', '=', 'users.name')
+            ->select('users.*', 'events.*')
+            ->where('events.name', '=', $user)
+            ->get();
+        return view('dashboard',compact('events'));
+    })->name('dashboard');
 });
 
 Route::controller(AdminController::class)->group(function () {

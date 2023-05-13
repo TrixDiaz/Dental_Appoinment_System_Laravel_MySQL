@@ -14,6 +14,7 @@ class Event extends Model
         'time_start',
         'time_end',
         'reason',
-        'status'
+        'status',
+        'name',
     ];
 }
