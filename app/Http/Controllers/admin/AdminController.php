@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
@@ -30,8 +31,10 @@ class AdminController extends Controller
         return view('error.404');
     }
 
-    public function usersEdit(){
-        return view('admin.user.edit');
+    public function usersEdit($id){
+        $user = User::all();
+        return view('admin.user.edit',compact('user'));
+        
     }
 
     public function store(Request $request){
