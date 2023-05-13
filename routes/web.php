@@ -42,5 +42,6 @@ Route::controller(AdminController::class)->group(function () {
     Route::get('/admin', 'index')->name('admin.index');
     Route::get('/adminUsers', 'users')->name('admin.user.index');
     Route::get('/adminUsers/{id}', 'usersEdit')->name('admin.user.edit');
+    Route::put('/adminUsers/{id}', 'update');
     Route::post('/store', 'store')->name('admin.store');
 });

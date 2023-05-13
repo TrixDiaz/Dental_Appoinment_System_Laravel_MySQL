@@ -32,9 +32,19 @@ class AdminController extends Controller
     }
 
     public function usersEdit($id){
-        $user = User::all();
+        $user = User::findorFail($id);
         return view('admin.user.edit',compact('user'));
-        
+    }
+
+    public function update(Request $request,User $user,int $id){
+        $user = User::findorFail($id);
+
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->role = $request->input('role');
+        $user->save();
+
+        return view('admin.user.edit', compact('user'))->with('message', 'Successfully Update');
     }
 
     public function store(Request $request){

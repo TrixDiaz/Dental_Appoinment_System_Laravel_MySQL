@@ -15,14 +15,14 @@
                 </div>
                 <div class="flex flex-col p-2 bg-slate-100">
                     <div class="space-y-8 divide-y divide-gray-200 w-1/2 mt-10">
-                        <form method="POST" action="">
+                        <form method="POST" action="/adminUsers/{{ $user->id }}">
                             @csrf
                             @method('PUT')
                             <div class="sm:col-span-6">
                                 <label for="name" class="block text-sm font-medium text-gray-700">Name
                                 </label>
                                 <div class="mt-1">
-                                    <input type="text" id="name" name="name" value="{{ Auth::user()->name }}"
+                                    <input type="text" id="name" name="name" value="{{ $user->name }}"
                                         class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                                 </div>
                                 @error('name')
@@ -33,21 +33,24 @@
                                 <label for="name" class="block text-sm font-medium text-gray-700">Email
                                 </label>
                                 <div class="mt-1">
-                                    <input type="text" id="email" name="email" value="{{ Auth::user()->email }}"
+                                    <input type="text" id="email" name="email" value="{{ $user->email }}"
                                         class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                                 </div>
-                                @error('name')
+                                @error('email')
                                     <span class="text-red-400 text-sm"></span>
                                 @enderror
                             </div>
                             <div class="sm:col-span-6">
-                                <label for="name" class="block text-sm font-medium text-gray-700">Position
-                                </label>
-                                <div class="mt-1">
-                                    <input type="text" id="email" name="email" value="{{ Auth::user()->role }}"
-                                        class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
-                                </div>
-                                @error('name')
+                                <label for="countries"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role</label>
+                                <select id="role" name="role"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option selected>{{ $user->role }}</option>
+                                    <option value="admin">admin</option>
+                                    <option value="users">users</option>
+                                </select>
+
+                                @error('role')
                                     <span class="text-red-400 text-sm"></span>
                                 @enderror
                             </div>
@@ -58,7 +61,7 @@
                         </form>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </div>
