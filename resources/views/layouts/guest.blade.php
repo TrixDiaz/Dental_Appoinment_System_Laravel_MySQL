@@ -36,7 +36,7 @@
 
 <body class="flex justify-center">
     <div class="items-center rounded drop-shadow-2xl mx-5 my-5 dark:bg-gray-900 w-2/4">
-        <div class="mx-5 my-48 px-10 py-10 bg-white dark:bg-gray-800 font-sans text-gray-900 antialiased">
+        <div class="mx-5 my-20 px-10 py-10 bg-white dark:bg-gray-800 font-sans text-gray-900 antialiased">
             {{ $slot }}
         </div>
     </div>

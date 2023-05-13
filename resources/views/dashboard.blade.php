@@ -102,14 +102,14 @@
                     <hr>
                 </div>
 
-                <form action="" method="POST"
+                <form action="/store" method="POST"
                     onsubmit="return confirm('Are you sure? There is No Cancellation.');">
                     @csrf
                     {{-- Appointment Reason --}}
                     <label class="block mt-5">
                         <span class="block text-md text-slate-700 font-semibold">Appointment Reason</span>
                         <!-- Using form state modifiers, the classes can be identical for every input -->
-                        <input type="text"
+                        <input type="text" name="reason"
                             class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
                             focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
                             disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
@@ -123,7 +123,7 @@
                         <label class="block mt-5">
                             <span class="block text-md text-slate-700 font-semibold">Request Date</span>
                             <!-- Using form state modifiers, the classes can be identical for every input -->
-                            <input type="date" id="start" name="request-date"
+                            <input type="date" id="start" name="date"
                                 value="{{ now()->format('Y-m-d') }}" min="2021-01-01" max="2023-12-31"
                                 class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
                             focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
@@ -139,7 +139,7 @@
                         <label class="block mt-5">
                             <span class="block text-md text-slate-700 font-semibold">Start Time</span>
                             <!-- Using form state modifiers, the classes can be identical for every input -->
-                            <input type="time" id="start" name="request-time" value="{{ now()->format('H:i') }}"
+                            <input type="time" id="start" name="time_start" value="{{ now()->format('H:i') }}"
                                 class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
                             focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
                             disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
@@ -152,9 +152,8 @@
 
                     <!-- Submit Button  -->
                     <div class="pt-5">
-                        <button
-                            class="py-2 px-4 bg-transparent text-red-600 font-semibold border border-red-600 rounded hover:bg-red-600 hover:text-white hover:border-transparent transition ease-in duration-200 transform hover:-translate-y-1 active:translate-y-0">Request
-                            Now</button>
+                        <input type="submit" value="Book Now" 
+                        class="py-2 px-4 bg-transparent text-red-600 font-semibold border border-red-600 rounded hover:bg-red-600 hover:text-white hover:border-transparent transition ease-in duration-200 transform hover:-translate-y-1 active:translate-y-0">
                     </div>
                 </form>
             </div>

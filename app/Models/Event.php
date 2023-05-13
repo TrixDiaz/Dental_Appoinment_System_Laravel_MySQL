@@ -16,5 +16,7 @@ class Event extends Model
         'reason',
         'status',
         'name',
+        'created_at',
+        'updated_at',
     ];
 }
