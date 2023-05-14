@@ -23,28 +23,24 @@ class AdminController extends Controller
         return view('error.404');
     }
 
-    public function users(){
-        $users = User::all();
-        if (Auth::user()->role === 'admin') {
-            return view('admin.user.index',compact('users'));
-        }
-        return view('error.404');
+    public function requestEdit($id)
+    {
+        $event = Event::findorFail($id);
+        return view('admin.edit-request', compact('event'));
     }
 
-    public function usersEdit($id){
-        $user = User::findorFail($id);
-        return view('admin.user.edit',compact('user'));
-    }
+    public function requestUpdate(Request $request, Event $event, int $id)
+    {
+        $event = Event::findorFail($id);
 
-    public function update(Request $request,User $user,int $id){
-        $user = User::findorFail($id);
+        $event->reason = $request->input('reason');
+        $event->date = $request->input('request-date');
+        $event->time_start = $request->input('time-start');
+        $event->time_end = $request->input('time-end');
+        $event->status = $request->input('status');
+        $event->save();
 
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        $user->role = $request->input('role');
-        $user->save();
-
-        return view('admin.user.edit', compact('user'))->with('message', 'Successfully Update');
+        return view('admin.edit-request', compact('event'))->with('message', 'Successfully Update');
     }
 
     public function store(Request $request){
@@ -60,5 +56,34 @@ class AdminController extends Controller
         ]);
         $validated = Event::create($validated);
         return back()->with('message', 'Successfully Created');
+    }
+
+    /********************************************************************************* users  *******************************************************************/ 
+
+    public function users()
+    {
+        $users = User::all();
+        if (Auth::user()->role === 'admin') {
+            return view('admin.user.index', compact('users'));
+        }
+        return view('error.404');
+    }
+
+    public function usersEdit($id)
+    {
+        $user = User::findorFail($id);
+        return view('admin.user.edit', compact('user'));
+    }
+
+    public function update(Request $request, User $user, int $id)
+    {
+        $user = User::findorFail($id);
+
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->role = $request->input('role');
+        $user->save();
+
+        return view('admin.user.edit', compact('user'))->with('message', 'Successfully Update');
     }
 }

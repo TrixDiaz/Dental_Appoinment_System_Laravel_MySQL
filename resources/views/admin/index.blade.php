@@ -80,7 +80,7 @@
                                                 <div class="flex">
 
                                                     <div class="block">
-                                                        <a href="" class="text-yellow-400 flex">
+                                                        <a href="{{ route('admin.edit-request', $event->id) }}" class="text-yellow-400 flex">
                                                                 <svg fill="#FACC15" class="w-5 h-5 mx-1"
                                                                     viewBox="0 0 24 24"
                                                                     xmlns="http://www.w3.org/2000/svg">
