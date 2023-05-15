@@ -20,10 +20,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('dashboard', function () {
-//     $events = DB::select('select * from events where active = ?');
-//     return view('dashboard');
-// });
+Route::get('dashboard', function () {
+    $events = DB::select('select * from events where active = ?');
+    return view('dashboard');
+});
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', function () {

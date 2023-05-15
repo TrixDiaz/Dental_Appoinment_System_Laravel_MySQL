@@ -45,16 +45,19 @@ class AdminController extends Controller
 
     public function store(Request $request){
        
-        $validated = $request->validate([
-            "reason" => ['required'],
-            "time_start" => ['required'],
-            "time_end" => ['nullable'],
-            "date" => ['required'],
-            "name" => ['required'],
-            "created_at" => Carbon::now(),
-            "updated_at" => Carbon::now(),
+        $starTime = Carbon::parse($request->input('time_start'));
+        $endTime = (clone $starTime)->addHour();
+
+        $validated = Event::create([
+            'name' => $request->input('name'),
+           'reason' => $request->input('reason'),
+            'date' => $request->input('date'),
+            'time_start' => $starTime,
+            'time_end' => $endTime,
+          // 'status' => $request->input('status'),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
         ]);
-        $validated = Event::create($validated);
         return back()->with('message', 'Successfully Created');
     }
 
