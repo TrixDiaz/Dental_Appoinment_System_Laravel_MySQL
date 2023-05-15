@@ -1,4 +1,5 @@
 <?php
+
 use Spatie\GoogleCalendar\Event;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -17,18 +18,7 @@ use App\Http\Controllers\admin\AdminController;
 */
 
 Route::get('/', function () {
-//create a new event
-$event = new Event;
-
-$event->name = 'A new event';
-$event->reason = 'Event description';
-$event->date = Carbon\Carbon::now();
-$event->time_start = Carbon\Carbon::now()->addHour();
-$event->time_end = Carbon\Carbon::now()->addHour();
-$event->save();
-$e = Event::get();
-dd($e);
-    //  return view('welcome');
+      return view('welcome');
 });
 
 Route::get('dashboard', function () {
@@ -45,7 +35,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
             ->where('events.name', '=', $user)
             ->limit(3)
             ->get();
-        return view('dashboard',compact('events'));
+        return view('dashboard', compact('events'));
     })->name('dashboard');
 });
 
@@ -58,5 +48,5 @@ Route::controller(AdminController::class)->group(function () {
     // admin functions 
     Route::get('/event-edit/{id}', 'requestEdit')->name('admin.edit-request');
     Route::put('/event-edit/{id}', 'requestUpdate'); //request update 
-    
+
 });
