@@ -53,34 +53,34 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($events as $event)
+                                    @foreach ($appointments as $appointment)
                                         <tr class="bg-gray-100 border-b">
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                {{ $event->id }}
+                                                {{ $appointment->id }}
                                             </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                {{ $event->reason }}
+                                                {{ $appointment->reason }}
                                             </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                {{ $event->date }}
+                                                {{ $appointment->date }}
                                             </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                {{ $event->time_start }}
+                                                {{ $appointment->time_start }}
                                             </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                {{ $event->time_end }}
+                                                {{ $appointment->time_end }}
                                             </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                {{ $event->status }}
+                                                {{ $appointment->status }}
                                             </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                {{ $event->created_at }}
+                                                {{ $appointment->created_at }}
                                             </td>
                                             <td class="text-sm text-gray-900 font-light py-4 whitespace-nowrap">
                                                 <div class="flex">
 
                                                     <div class="block">
-                                                        <a href="{{ route('admin.edit-request', $event->id) }}" class="text-yellow-400 flex">
+                                                        <a href="{{ route('admin.edit-request', $appointment->id) }}" class="text-yellow-400 flex">
                                                                 <svg fill="#FACC15" class="w-5 h-5 mx-1"
                                                                     viewBox="0 0 24 24"
                                                                     xmlns="http://www.w3.org/2000/svg">

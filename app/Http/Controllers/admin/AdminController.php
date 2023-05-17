@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Models\User;
-use App\Models\Event;
+use App\Models\Appointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -16,31 +16,31 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $events = Event::all();
+        $appointments = Appointment::all();
         if (Auth::user()->role === 'admin') {
-            return view('admin.index',compact('events'));
+            return view('admin.index',compact('appointments'));
         }
         return view('error.404');
     }
 
     public function requestEdit($id)
     {
-        $event = Event::findorFail($id);
-        return view('admin.edit-request', compact('event'));
+        $appointments = Appointment::findorFail($id);
+        return view('admin.edit-request', compact('appointments'));
     }
 
-    public function requestUpdate(Request $request, Event $event, int $id)
+    public function requestUpdate(Request $request, Appointment $appointments, int $id)
     {
-        $event = Event::findorFail($id);
+        $appointments = Appointment::findorFail($id);
 
-        $event->reason = $request->input('reason');
-        $event->date = $request->input('request-date');
-        $event->time_start = $request->input('time-start');
-        $event->time_end = $request->input('time-end');
-        $event->status = $request->input('status');
-        $event->save();
+        $appointments->reason = $request->input('reason');
+        $appointments->date = $request->input('request-date');
+        $appointments->time_start = $request->input('time-start');
+        $appointments->time_end = $request->input('time-end');
+        $appointments->status = $request->input('status');
+        $appointments->save();
 
-        return view('admin.edit-request', compact('event'))->with('message', 'Successfully Update');
+        return view('admin.edit-request', compact('appointments'))->with('message', 'Successfully Update');
     }
 
     public function store(Request $request){
@@ -54,7 +54,7 @@ class AdminController extends Controller
             "created_at" => Carbon::now(),
             "updated_at" => Carbon::now(),
         ]);
-        $validated = Event::create($validated);
+        $validated = Appointment::create($validated);
         return back()->with('message', 'Successfully Created');
     }
 

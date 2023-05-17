@@ -22,20 +22,20 @@ Route::get('/', function () {
 });
 
 Route::get('dashboard', function () {
-    $events = DB::select('select * from events where active = ?');
+    $events = DB::select('select * from appoinment where active = ?');
     return view('dashboard');
 });
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', function () {
-        $user = Auth::User()->name;
-        $events = DB::table('events')
-            ->join('users', 'events.name', '=', 'users.name')
-            ->select('users.*', 'events.*')
-            ->where('events.name', '=', $user)
-            ->limit(3)
-            ->get();
-        return view('dashboard', compact('events'));
+        // $user = Auth::User()->name;
+        // $events = DB::table('appoinment')
+        //     ->join('users', 'appoinment.name', '=', 'users.name')
+        //     ->select('users.*', 'appoinment.*')
+        //     ->where('appoinment.name', '=', $user)
+        //     ->limit(3)
+        //     ->get();
+        return view('dashboard');
     })->name('dashboard');
 });
 

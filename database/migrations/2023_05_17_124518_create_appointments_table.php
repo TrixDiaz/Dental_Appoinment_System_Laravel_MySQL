@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('events', function (Blueprint $table) {
+        Schema::create('appointments', function (Blueprint $table) {
             $table->id();
             $table->date('date')->nullable();
             $table->time('time_start')->nullable();
             $table->time('time_end')->nullable();
-            $table->string('reason')->nullable();
+            $table->string('description')->nullable();
             $table->string('name')->nullable();
+            $table->string('title')->nullable();
             $table->string('status')->default('pending');
             $table->timestamps();
         });
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('event');
+        Schema::dropIfExists('appointments');
     }
 };

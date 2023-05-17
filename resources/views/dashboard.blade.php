@@ -38,7 +38,7 @@
                                                 </th>
                                                 <th scope="col"
                                                     class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                    Reason
+                                                    Appointment For
                                                 </th>
                                                 <th scope="col"
                                                     class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
@@ -63,38 +63,38 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($events as $event)
+                                            {{-- @foreach ($events as $event) --}}
                                                 <tr class="bg-gray-100 border-b">
                                                     <td
                                                         class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        {{ $event->id }}
+                                                        {{-- {{ $event->id }} --}}
                                                     </td>
                                                     <td
                                                         class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        {{ $event->reason }}
+                                                        {{-- {{ $event->reason }} --}}
                                                     </td>
                                                     <td
                                                         class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        {{ $event->date }}
+                                                        {{-- {{ $event->date }} --}}
                                                     </td>
                                                     <td
                                                         class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        {{ $event->time_start }}
+                                                        {{-- {{ $event->time_start }} --}}
                                                     </td>
                                                     <td 
                                                         class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        {{ $event->time_end }}
+                                                        {{-- {{ $event->time_end }} --}}
                                                     </td>
                                                     <td
                                                         class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        {{ $event->status }}
+                                                        {{-- {{ $event->status }} --}}
                                                     </td>
                                                     <td
                                                         class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        {{ $event->created_at }}
+                                                        {{-- {{ $event->created_at }} --}}
                                                     </td>
                                                 </tr>
-                                            @endforeach
+                                            {{-- @endforeach --}}
                                         </tbody>
                                     </table>
                                 </div>
@@ -111,7 +111,7 @@
                 </div>
 
                 <form action="/store" method="POST"
-                    onsubmit="return confirm('Are you sure? There is No Cancellation.');">
+                    onsubmit="return confirm('There is no Cancellation for Booking and it takes maximum an Hour. Are you Sure?');">
                     @csrf
                     <input type="text" name="name" value="{{ $user = Auth::user()->name; }}" hidden>
                     {{-- Appointment Reason --}}
@@ -124,7 +124,7 @@
                             disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
                             invalid:border-pink-500 invalid:text-pink-600
                             focus:invalid:border-pink-500 focus:invalid:ring-pink-500
-                            " />
+                            " required/>
                     </label>
 
                     {{-- Request Date --}}
@@ -133,13 +133,13 @@
                             <span class="block text-md text-slate-700 font-semibold">Request Date</span>
                             <!-- Using form state modifiers, the classes can be identical for every input -->
                             <input type="date" id="start" name="date"
-                                value="{{ now()->format('Y-m-d') }}" min="2021-01-01" max="2023-12-31"
+                                value="" min="2021-01-01" max="2023-12-31"
                                 class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
                             focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
                             disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
                             invalid:border-pink-500 invalid:text-pink-600
                             focus:invalid:border-pink-500 focus:invalid:ring-pink-500
-                            " />
+                            " required/>
                         </label>
                     </div>
 
@@ -148,13 +148,13 @@
                         <label class="block mt-5">
                             <span class="block text-md text-slate-700 font-semibold">Start Time</span>
                             <!-- Using form state modifiers, the classes can be identical for every input -->
-                            <input type="time" id="start" name="time_start" value="{{ now()->format('H:i') }}"
+                            <input type="time" id="start" name="time_start" value=""
                                 class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
                             focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
                             disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
                             invalid:border-pink-500 invalid:text-pink-600
                             focus:invalid:border-pink-500 focus:invalid:ring-pink-500
-                            " />
+                            " required/>
                         </label>
                     </div>
 
