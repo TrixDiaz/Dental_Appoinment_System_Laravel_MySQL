@@ -9,13 +9,12 @@ class Appointment extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'date',
-        'time_start',
-        'time_end',
-        'description',
         'name',
-        'status',
+        'date',
+        'time',
+        'description',
         'title',
+        'status',
         'created_at',
         'updated_at',
     ];

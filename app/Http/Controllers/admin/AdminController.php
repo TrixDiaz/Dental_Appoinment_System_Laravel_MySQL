@@ -5,7 +5,8 @@ namespace App\Http\Controllers\admin;
 use App\Models\User;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
+// use Illuminate\Support\Carbon;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -44,16 +45,16 @@ class AdminController extends Controller
     }
 
     public function store(Request $request){
-       
-        $validated = $request->validate([
-            "reason" => ['required'],
-            "time_start" => ['required'],
-            "time_end" => ['nullable'],
-            "date" => ['required'],
+
+     $validated = $request->validate([
             "name" => ['required'],
+            "title" => ['required'],
+            "description" => ['required'],
+            "date" => ['required'],
+            "time" => ['required'],
             "created_at" => Carbon::now(),
             "updated_at" => Carbon::now(),
-        ]);
+     ]);
         $validated = Appointment::create($validated);
         return back()->with('message', 'Successfully Created');
     }

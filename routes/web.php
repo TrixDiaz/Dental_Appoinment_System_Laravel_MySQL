@@ -44,7 +44,7 @@ Route::controller(AdminController::class)->group(function () {
     Route::get('/adminUsers', 'users')->name('admin.user.index');
     Route::get('/Users/{id}', 'usersEdit')->name('admin.user.edit'); // users show by id
     Route::put('/Users/{id}', 'update'); //users update 
-    Route::post('/store', 'store')->name('admin.store');
+    Route::post('/store', 'store')->name('admin.store'); // store appointment
     // admin functions 
     Route::get('/event-edit/{id}', 'requestEdit')->name('admin.edit-request');
     Route::put('/event-edit/{id}', 'requestUpdate'); //request update 
