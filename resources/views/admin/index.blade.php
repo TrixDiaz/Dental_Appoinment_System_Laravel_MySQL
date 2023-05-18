@@ -2,20 +2,15 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
 
-    {{-- <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboards') }}
-        </h2>
-    </x-slot> --}}
 
     <div class="py-6">
         <div class="mx-auto sm:px-6 lg:px-8">
             <div class="p-3 bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                {{-- <x-welcome /> --}}
+
                 <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
                     <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
                         <div class="overflow-hidden ">
-                            <table class="min-w-full h-screen" id="myTable">
+                            <table class="min-w-full h-auto" id="myTable">
                                 <thead class="bg-white border-b">
                                     <tr>
                                         <th scope="col"
@@ -24,7 +19,7 @@
                                         </th>
                                         <th scope="col"
                                             class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                            Reason
+                                            Description
                                         </th>
                                         <th scope="col"
                                             class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
@@ -33,10 +28,6 @@
                                         <th scope="col"
                                             class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                             Time Start
-                                        </th>
-                                        <th scope="col"
-                                            class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                            Time End
                                         </th>
                                         <th scope="col"
                                             class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
@@ -59,16 +50,13 @@
                                                 {{ $appointment->id }}
                                             </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                {{ $appointment->reason }}
+                                                {{ $appointment->description }}
                                             </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                                 {{ $appointment->date }}
                                             </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                {{ $appointment->time_start }}
-                                            </td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                {{ $appointment->time_end }}
+                                                {{ $appointment->time }}
                                             </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                                 {{ $appointment->status }}
@@ -109,7 +97,7 @@
                                                                 </path>
                                                             </svg>
 
-                                                            <button type="submit">Rejected</button>
+                                                            <button type="submit">Delete</button>
                                                         </form>
                                                     
                                                 </div>

@@ -48,11 +48,7 @@
                                                     </th>
                                                     <th scope="col"
                                                         class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                        Time Start
-                                                    </th>
-                                                    <th scope="col"
-                                                        class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                        Time End
+                                                        Time
                                                     </th>
                                                     <th scope="col"
                                                         class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
@@ -65,38 +61,34 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {{-- @foreach ($events as $event) --}}
+                                                @foreach ($appointments as $appointment)
                                                 <tr class="bg-gray-100 border-b">
                                                     <td
                                                         class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        {{-- {{ $event->id }} --}}
+                                                        {{ $appointment->id }}
                                                     </td>
                                                     <td
                                                         class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        {{-- {{ $event->reason }} --}}
+                                                        {{ $appointment->description }}
                                                     </td>
                                                     <td
                                                         class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        {{-- {{ $event->date }} --}}
+                                                        {{ $appointment->date }}
                                                     </td>
                                                     <td
                                                         class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        {{-- {{ $event->time_start }} --}}
+                                                        {{ $appointment->time }}
                                                     </td>
                                                     <td
                                                         class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        {{-- {{ $event->time_end }} --}}
+                                                        {{ $appointment->status }}
                                                     </td>
                                                     <td
                                                         class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        {{-- {{ $event->status }} --}}
-                                                    </td>
-                                                    <td
-                                                        class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        {{-- {{ $event->created_at }} --}}
+                                                        {{ $appointment->created_at }}
                                                     </td>
                                                 </tr>
-                                                {{-- @endforeach --}}
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>

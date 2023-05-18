@@ -28,14 +28,14 @@ Route::get('dashboard', function () {
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', function () {
-        // $user = Auth::User()->name;
-        // $events = DB::table('appoinment')
-        //     ->join('users', 'appoinment.name', '=', 'users.name')
-        //     ->select('users.*', 'appoinment.*')
-        //     ->where('appoinment.name', '=', $user)
-        //     ->limit(3)
-        //     ->get();
-        return view('dashboard');
+        $user = Auth::User()->name;
+        $appointments = DB::table('appointments')
+            ->join('users', 'appointments.name', '=', 'users.name')
+            ->select('users.*', 'appointments.*')
+            ->where('appointments.name', '=', $user)
+            ->limit(3)
+            ->get();
+        return view('dashboard', compact('appointments'));
     })->name('dashboard');
 });
 
