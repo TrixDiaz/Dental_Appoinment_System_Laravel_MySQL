@@ -56,19 +56,6 @@ class AdminController extends Controller
             "updated_at" => Carbon::now(),
      ]);
         $validated = Appointment::create($validated);
-    public function store(Request $request)
-    {
-        $validated = $request->validate([
-            "name" => ['required'],
-            "title" => ['required'],
-            "description" => ['required'],
-            "date" => ['required'],
-            "time" => ['required'],
-            "doctor" => ['required'],
-            "created_at" => Carbon::now(),
-            "updated_at" => Carbon::now(),
-        ]);
-        $validated = Appointment::create($validated);
         return back()->with('message', 'Successfully Created');
     }
 

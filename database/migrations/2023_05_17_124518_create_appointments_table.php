@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
-<<<<<<< HEAD
             $table->string('date');
             $table->string('time');
             $table->string('description');
