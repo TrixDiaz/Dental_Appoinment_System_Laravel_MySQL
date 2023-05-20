@@ -1,7 +1,9 @@
 <x-admin-layout>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+        integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <div class="py-10">
         <div class="mx-auto sm:px-6 lg:px-8">
             <div class="p-6 bg-white overflow-hidden shadow-xl sm:rounded-lg">
@@ -83,7 +85,8 @@
                                                                 <h3
                                                                     class="mb-4 text-xl font-medium text-gray-900 dark:text-white">
                                                                     Register Users</h3>
-                                                                <form action="/createUser" method="POST" class="space-y-6">
+                                                                <form action="/createUser" method="POST"
+                                                                    class="space-y-6">
                                                                     @csrf
                                                                     <div>
                                                                         <label for="username"
@@ -114,12 +117,14 @@
                                                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                                                             placeholder="name@company.com" required>
                                                                     </div>
-                                                                    <div >
+                                                                    <div>
                                                                         <label for="password"
                                                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
                                                                             password</label>
                                                                         <input type="password" name="password"
-                                                                            id="password" placeholder="Default Password set" value="admin123"
+                                                                            id="password"
+                                                                            placeholder="Default Password set"
+                                                                            value="admin123"
                                                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                                                             required readonly>
                                                                     </div>
@@ -245,4 +250,17 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        @if(Session::has('message'))
+            <script>
+                toastr.options = {
+                    "progressBar" : true,
+                    "closeButton" : true,
+                }
+                toastr.success("{{ Session:get('message') }}",'Success!',{timeOut:12000})
+            </script>
+        @endif
 </x-admin-layout>
