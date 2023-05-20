@@ -22,7 +22,7 @@
                                 <label for="reason" class="block text-sm font-medium text-gray-700">Title
                                 </label>
                                 <div class="mt-1">
-                                    <input type="text" id="reason" name="reason" value="{{ $appointments->title }}"
+                                    <input type="text" id="reason" name="title" value="{{ $appointments->title }}"
                                         class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                                 </div>
                                 @error('reason')
@@ -34,7 +34,7 @@
                                 <label for="reason" class="block text-sm font-medium text-gray-700">description
                                 </label>
                                 <div class="mt-1">
-                                    <input type="text" id="reason" name="reason" value="{{ $appointments->description }}"
+                                    <input type="text" id="reason" name="description" value="{{ $appointments->description }}"
                                         class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                                 </div>
                                 @error('reason')
@@ -47,7 +47,7 @@
                                 <label for="request-date" class="block text-sm font-medium text-gray-700">Request Date
                                 </label>
                                 <div class="mt-1">
-                                    <input type="text" id="request-date" name="request-date"
+                                    <input type="text" id="date" name="date"
                                         value="{{ $appointments->date }}"
                                         class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                                 </div>
@@ -56,18 +56,33 @@
                                 @enderror
                             </div>
 
+                            <div class="my-3">
+                            <label for="time"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an Time
+                                Frame</label>
+                            <select name="time" id="time" 
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                required>
+                                <option value="{{ $appointments->time }}" readonly selected>{{ $appointments->time }}</option>
+                                <option value="8:00am - 9:00am">8:00am - 9:00am</option>
+                                <option value="9:30am - 10:30am">9:30am - 10:30am</option>
+                                <option value="11:00am - 12:00pm">11:00am - 12:00pm</option>
+                                <option value="12:30pm - 1:30pm">12:30pm - 1:30pm</option>
+                            </select>
+                        </div>
 
-                            <div class="sm:col-span-6">
-                                <label for="time-end" class="block text-sm font-medium text-gray-700">Time end
-                                </label>
-                                <div class="mt-1">
-                                    <input type="text" id="time-end" name="time-end" value="{{ $appointments->time }}"
-                                        class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
-                                </div>
-                                @error('time-end')
-                                    <span class="text-red-400 text-sm"></span>
-                                @enderror
-                            </div>
+                        <div class="my-3">
+                            <label for="doctor"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an Doctor</label>
+                            <select name="doctor" id="doctor" 
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                required>
+                                @foreach ($doctors as $doctor)
+                                 <option value="{{ $doctor->name }}" readonly selected>{{ $doctor->name }}</option>
+                                    <option value="{{ $doctor->name }}">{{ $doctor->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
 
 
                             <div class="sm:col-span-6">
@@ -75,7 +90,7 @@
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an option</label>
                                 <select id="status" name="status"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option selected>{{ $event->status }}</option>
+                                    <option selected>{{ $appointments->status }}</option>
                                     <option value="Approved">Approve</option>
                                     <option value="Pending">Pending</option>
                                     <option value="Rejected">Rejected</option>

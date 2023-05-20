@@ -18,6 +18,7 @@ class AdminController extends Controller
 {
     public function index()
     {
+        
         $appointments = Appointment::all();
         if (Auth::user()->role === 'admin') {
             return view('admin.index', compact('appointments'));
@@ -27,22 +28,27 @@ class AdminController extends Controller
 
     public function requestEdit($id)
     {
+        $doctors = DB::table('users')
+            ->select('users.*')
+            ->where('type', '=', 'doctor')
+            ->get();
         $appointments = Appointment::findorFail($id);
-        return view('admin.edit-request', compact('appointments'));
+        return view('admin.edit-request', compact('appointments','doctors'));
     }
 
     public function requestUpdate(Request $request, Appointment $appointments, int $id)
     {
         $appointments = Appointment::findorFail($id);
 
-        $appointments->reason = $request->input('reason');
-        $appointments->date = $request->input('request-date');
-        $appointments->time_start = $request->input('time-start');
-        $appointments->time_end = $request->input('time-end');
+        $appointments->description = $request->input('title');
+        $appointments->description = $request->input('description');
+        $appointments->date = $request->input('date');
+        $appointments->time = $request->input('time');
+        $appointments->status = $request->input('doctor');
         $appointments->status = $request->input('status');
         $appointments->save();
 
-        return view('admin.edit-request', compact('appointments'))->with('message', 'Successfully Update');
+        return back()->with('message', 'Successfully Update', compact('appointments'));
     }
 
     public function store(Request $request)
