@@ -47,17 +47,38 @@ class AdminController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            "name" => ['required'],
-            "title" => ['required'],
-            "description" => ['required'],
-            "date" => ['required'],
-            "time" => ['required'],
-            "doctor" => ['required'],
-            "created_at" => Carbon::now(),
-            "updated_at" => Carbon::now(),
+        // $validated = $request->validate([
+        //     "name" => ['required'],
+        //     "title" => ['required'],
+        //     "description" => ['required'],
+        //     "date" => ['required'],
+        //     "doctor" => ['required'],
+        //     "time" => ['required'],
+        //     "created_at" => Carbon::now(),
+        //     "updated_at" => Carbon::now(),
+        // ]);
+        // $validated = Appointment::create($validated);
+
+        $validation = Validator::make($request->all(), [
+            'name'  =>  'required|string|max:191',
+            'title'  =>  'required|string|max:191',
+            'description'   =>  'required|string|max:191',
+            'date' => ['required', 'string', 'max:255'],
+            'doctor' => ['required', 'string', 'max:255'],
+            'time' => ['required', 'string', 'max:255'],
         ]);
-        $validated = Appointment::create($validated);
+
+        
+        $push  = Appointment::create([
+            'name' => $request->name,
+            'title' => $request->title,
+            'description' => $request->description,
+            'date' => $request->date,
+            'doctor' => $request->doctor,
+            'time' => $request->time,
+        ]);
+
+        event(new Registered($push));
         return back()->with('message', 'Successfully Created');
     }
 
@@ -90,6 +111,7 @@ class AdminController extends Controller
             "created_at" => Carbon::now(),
             "updated_at" => Carbon::now(),
         ]);
+        $validated['password'] = bcrypt($validated['password']);
         $validated = User::create($validated);
         return back()->with('message', 'Successfully Created');
     }

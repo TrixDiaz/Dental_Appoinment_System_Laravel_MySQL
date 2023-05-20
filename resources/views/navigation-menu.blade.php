@@ -10,12 +10,22 @@
                     </a>
                 </div>
 
+
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+
+                @if (Route::has('chatify'))
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link href="{{ route('chatify') }}">
+                            {{ __('Messenger') }}
+                        </x-nav-link>
+                    </div>
+                @endif 
+                
                 @if (Auth::user()->role == 'admin')
                     @if (Route::has('admin.index'))
                         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
@@ -26,6 +36,10 @@
                     @endif
                 @endif
             </div>
+
+
+
+
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <!-- Teams Dropdown -->

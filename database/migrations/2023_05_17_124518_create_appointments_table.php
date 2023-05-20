@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('description');
             $table->string('name');
             $table->string('title');
-            $table->string('doctor');
+            $table->string('doctor')->nullable();
             $table->string('status')->default('pending');
             $table->timestamps();
         });
