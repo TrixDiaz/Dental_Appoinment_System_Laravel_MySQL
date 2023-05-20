@@ -14,10 +14,8 @@ class Appointment extends Model
         'time',
         'description',
         'title',
-        'doctor',
         'status',
         'created_at',
         'updated_at',
-        'email_verified_at',
     ];
 }
