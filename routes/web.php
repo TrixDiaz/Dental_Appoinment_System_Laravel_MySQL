@@ -28,6 +28,10 @@ Route::get('dashboard', function () {
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', function () {
+        $doctors = DB::table('users')
+            ->select('users.*')
+            ->where('type', '=', 'doctor')
+            ->get();
         $user = Auth::User()->name;
         $appointments = DB::table('appointments')
             ->join('users', 'appointments.name', '=', 'users.name')
@@ -35,7 +39,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
             ->where('appointments.name', '=', $user)
             ->limit(3)
             ->get();
-        return view('dashboard', compact('appointments'));
+        return view('dashboard', compact('appointments','doctors'));
     })->name('dashboard');
 });
 
@@ -48,5 +52,7 @@ Route::controller(AdminController::class)->group(function () {
     // admin functions 
     Route::get('/event-edit/{id}', 'requestEdit')->name('admin.edit-request');
     Route::put('/event-edit/{id}', 'requestUpdate'); //request update 
-
+    // dashboard folder 
+    Route::get('/adminDashboard', 'dashboard')->name('admin.dashboard.index');
+    Route::post('/createUser', 'createUser');
 });

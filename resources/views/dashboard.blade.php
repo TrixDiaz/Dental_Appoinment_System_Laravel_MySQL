@@ -40,7 +40,11 @@
                                                     </th>
                                                     <th scope="col"
                                                         class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                        Appointment For
+                                                        Title
+                                                    </th>
+                                                    <th scope="col"
+                                                        class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                        Description
                                                     </th>
                                                     <th scope="col"
                                                         class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
@@ -54,6 +58,11 @@
                                                         class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                                         Status
                                                     </th>
+                                                    </th>
+                                                    <th scope="col"
+                                                        class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                        Doctor
+                                                    </th>
                                                     <th scope="col"
                                                         class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                                         Created Date and Time
@@ -62,32 +71,40 @@
                                             </thead>
                                             <tbody>
                                                 @foreach ($appointments as $appointment)
-                                                <tr class="bg-gray-100 border-b">
-                                                    <td
-                                                        class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        {{ $appointment->id }}
-                                                    </td>
-                                                    <td
-                                                        class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        {{ $appointment->description }}
-                                                    </td>
-                                                    <td
-                                                        class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        {{ $appointment->date }}
-                                                    </td>
-                                                    <td
-                                                        class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        {{ $appointment->time }}
-                                                    </td>
-                                                    <td
-                                                        class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        {{ $appointment->status }}
-                                                    </td>
-                                                    <td
-                                                        class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        {{ $appointment->created_at }}
-                                                    </td>
-                                                </tr>
+                                                    <tr class="bg-gray-100 border-b">
+                                                        <td
+                                                            class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                            {{ $appointment->id }}
+                                                        </td>
+                                                        <td
+                                                            class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                            {{ $appointment->title }}
+                                                        </td>
+                                                        <td
+                                                            class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                            {{ $appointment->description }}
+                                                        </td>
+                                                        <td
+                                                            class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                            {{ $appointment->date }}
+                                                        </td>
+                                                        <td
+                                                            class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                            {{ $appointment->time }}
+                                                        </td>
+                                                        <td
+                                                            class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                            {{ $appointment->status }}
+                                                        </td>
+                                                        <td
+                                                            class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                            {{ $appointment->doctor }}
+                                                        </td>
+                                                        <td
+                                                            class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                            {{ $appointment->created_at }}
+                                                        </td>
+                                                    </tr>
                                                 @endforeach
                                             </tbody>
                                         </table>
@@ -149,21 +166,38 @@
                             </div>
                             <input datepicker type="text" name="date"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Select date">
+                                placeholder="Select date" required>
                         </div>
 
 
-                        <label for="time"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an
-                            Time Frame</label>
-                        <select id="time" name="time"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option disabled selected>Choose a Time</option>
-                            <option value="8:00am - 9:00am">8:00am - 9:00am</option>
-                            <option value="9:30am - 10:30am">9:30am - 10:30am</option>
-                            <option value="11:00am - 12:00pm">11:00am - 12:00pm</option>
-                            <option value="12:30pm - 1:30pm">12:30pm - 1:30pm</option>
-                        </select>
+                        <div class="my-3">
+                            <label for="time"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an Time
+                                Frame</label>
+                            <select id="time" name="time"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                required>
+                                <option disabled selected>Choose a Time</option>
+                                <option value="8:00am - 9:00am">8:00am - 9:00am</option>
+                                <option value="9:30am - 10:30am">9:30am - 10:30am</option>
+                                <option value="11:00am - 12:00pm">11:00am - 12:00pm</option>
+                                <option value="12:30pm - 1:30pm">12:30pm - 1:30pm</option>
+                            </select>
+                        </div>
+
+
+                        <div class="my-3">
+                            <label for="doctor"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an Doctor</label>
+                            <select id="doctor" name="doctor"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                required>
+                                <option disabled selected>Choose a Doctor</option>
+                                @foreach ($doctors as $doctor)
+                                    <option value="{{ $doctor->name }}">{{ $doctor->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
 
 
                         <!-- Submit Button  -->
