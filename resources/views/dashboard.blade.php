@@ -11,7 +11,6 @@
     <div class="py-6">
         <div class="mx-auto sm:px-6 lg:px-8">
             <div class="p-6 bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                {{-- <x-welcome /> --}}
 
                 <div class="grid grid-rows-3 grid-flow-col gap-4">
                     {{-- <div
