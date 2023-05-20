@@ -43,11 +43,26 @@
                             <div class="sm:col-span-6">
                                 <label for="role"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role</label>
-                                <select id="role" name="role"
+                                <select id="role" name="role" value="{{ $user->role }}"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     <option selected>{{ $user->role }}</option>
                                     <option value="admin">admin</option>
                                     <option value="users">users</option>
+                                </select>
+
+                                @error('role')
+                                    <span class="text-red-400 text-sm"></span>
+                                @enderror
+                            </div>
+
+                            <div class="sm:col-span-6">
+                                <label for="type"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type</label>
+                                <select id="type" name="type" value="{{ $user->type }}"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option selected>{{ $user->type }}</option>
+                                    <option value="patient">patient</option>
+                                    <option value="doctor">doctor</option>
                                 </select>
 
                                 @error('role')

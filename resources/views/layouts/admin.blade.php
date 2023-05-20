@@ -40,7 +40,7 @@
                 x-data="{ open: false }">
                 <div class="flex flex-row items-center justify-between flex-shrink-0 px-8 py-4">
                     <a href="#"
-                        class="text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">ADMIN Dashboard</a>
+                        class="text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">Admin Dashboard</a>
                     <button class="rounded-lg md:hidden focus:outline-none focus:shadow-outline" @click="open = !open">
                         <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
                             <path x-show="!open" fill-rule="evenodd"
@@ -54,7 +54,8 @@
                 </div>
                 <nav :class="{ 'block': open, 'hidden': !open }"
                     class="flex-grow px-4 pb-4 md:block md:pb-0 md:overflow-y-auto">
-                    <x-admin-link :href="route('admin.index')" :active="request()->routeIs('admin.index')">Home</x-admin-link>
+                    <x-admin-link :href="route('admin.index')" :active="request()->routeIs('admin.index')">Appointments</x-admin-link>
+                    <x-admin-link :href="route('admin.dashboard.index')" :active="request()->routeIs('admin.dashboard.index')">Dashboard</x-admin-link>
                     <x-admin-link :href="route('admin.user.index')" :active="request()->routeIs('admin.user.index')">Users</x-admin-link>
 
                     <div @click.away="open = false" class="relative" x-data="{ open: false }">
@@ -96,16 +97,18 @@
                 </nav>
             </div>
 
-        <!-- Page Content -->
-        <div class="w-full bg-slate-50">
+            <!-- Page Content -->
+            <div class="w-full bg-slate-50">
                 <!-- Page Content -->
                 <main>
                     {{ $slot }}
                 </main>
             </div>
-    </div>
+        </div>
 
+    </div>
     @stack('modals')
+
 
     @livewireScripts
 </body>

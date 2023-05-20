@@ -1,5 +1,6 @@
 <?php
 
+use Spatie\GoogleCalendar\Event;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -17,24 +18,28 @@ use App\Http\Controllers\admin\AdminController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+      return view('welcome');
 });
 
 Route::get('dashboard', function () {
-    $events = DB::select('select * from events where active = ?');
+    $events = DB::select('select * from appoinment where active = ?');
     return view('dashboard');
 });
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', function () {
+        $doctors = DB::table('users')
+            ->select('users.*')
+            ->where('type', '=', 'doctor')
+            ->get();
         $user = Auth::User()->name;
-        $events = DB::table('events')
-            ->join('users', 'events.name', '=', 'users.name')
-            ->select('users.*', 'events.*')
-            ->where('events.name', '=', $user)
+        $appointments = DB::table('appointments')
+            ->join('users', 'appointments.name', '=', 'users.name')
+            ->select('users.*', 'appointments.*')
+            ->where('appointments.name', '=', $user)
             ->limit(3)
             ->get();
-        return view('dashboard',compact('events'));
+        return view('dashboard', compact('appointments','doctors'));
     })->name('dashboard');
 });
 
@@ -43,9 +48,11 @@ Route::controller(AdminController::class)->group(function () {
     Route::get('/adminUsers', 'users')->name('admin.user.index');
     Route::get('/Users/{id}', 'usersEdit')->name('admin.user.edit'); // users show by id
     Route::put('/Users/{id}', 'update'); //users update 
-    Route::post('/store', 'store')->name('admin.store');
+    Route::post('/store', 'store')->name('admin.store'); // store appointment
     // admin functions 
     Route::get('/event-edit/{id}', 'requestEdit')->name('admin.edit-request');
     Route::put('/event-edit/{id}', 'requestUpdate'); //request update 
-    
+    // dashboard folder 
+    Route::get('/adminDashboard', 'dashboard')->name('admin.dashboard.index');
+    Route::post('/createUser', 'createUser');
 });

@@ -5,18 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Event extends Model
+class Appointment extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'date',
-        'time_start',
-        'time_end',
-        'reason',
-        'status',
         'name',
+        'date',
+        'time',
+        'description',
+        'title',
+        'doctor',
+        'status',
         'created_at',
         'updated_at',
+        'email_verified_at',
     ];
 }

@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\admin;
 
+use Carbon\Carbon;
 use App\Models\User;
-use App\Models\Event;
+use App\Models\Appointment;
+// use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Validator;
 
@@ -16,52 +18,71 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $events = Event::all();
+        $appointments = Appointment::all();
         if (Auth::user()->role === 'admin') {
-            return view('admin.index',compact('events'));
+            return view('admin.index', compact('appointments'));
         }
         return view('error.404');
     }
 
     public function requestEdit($id)
     {
-        $event = Event::findorFail($id);
-        return view('admin.edit-request', compact('event'));
+        $appointments = Appointment::findorFail($id);
+        return view('admin.edit-request', compact('appointments'));
     }
 
-    public function requestUpdate(Request $request, Event $event, int $id)
+    public function requestUpdate(Request $request, Appointment $appointments, int $id)
     {
-        $event = Event::findorFail($id);
+        $appointments = Appointment::findorFail($id);
 
-        $event->reason = $request->input('reason');
-        $event->date = $request->input('request-date');
-        $event->time_start = $request->input('time-start');
-        $event->time_end = $request->input('time-end');
-        $event->status = $request->input('status');
-        $event->save();
+        $appointments->reason = $request->input('reason');
+        $appointments->date = $request->input('request-date');
+        $appointments->time_start = $request->input('time-start');
+        $appointments->time_end = $request->input('time-end');
+        $appointments->status = $request->input('status');
+        $appointments->save();
 
-        return view('admin.edit-request', compact('event'))->with('message', 'Successfully Update');
+        return view('admin.edit-request', compact('appointments'))->with('message', 'Successfully Update');
     }
 
-    public function store(Request $request){
-       
-        $starTime = Carbon::parse($request->input('time_start'));
-        $endTime = (clone $starTime)->addHour();
+    public function store(Request $request)
+    {
+        // $validated = $request->validate([
+        //     "name" => ['required'],
+        //     "title" => ['required'],
+        //     "description" => ['required'],
+        //     "date" => ['required'],
+        //     "doctor" => ['required'],
+        //     "time" => ['required'],
+        //     "created_at" => Carbon::now(),
+        //     "updated_at" => Carbon::now(),
+        // ]);
+        // $validated = Appointment::create($validated);
 
-        $validated = Event::create([
-            'name' => $request->input('name'),
-           'reason' => $request->input('reason'),
-            'date' => $request->input('date'),
-            'time_start' => $starTime,
-            'time_end' => $endTime,
-          // 'status' => $request->input('status'),
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
+        $validation = Validator::make($request->all(), [
+            'name'  =>  'required|string|max:191',
+            'title'  =>  'required|string|max:191',
+            'description'   =>  'required|string|max:191',
+            'date' => ['required', 'string', 'max:255'],
+            'doctor' => ['required', 'string', 'max:255'],
+            'time' => ['required', 'string', 'max:255'],
         ]);
+
+        
+        $push  = Appointment::create([
+            'name' => $request->name,
+            'title' => $request->title,
+            'description' => $request->description,
+            'date' => $request->date,
+            'doctor' => $request->doctor,
+            'time' => $request->time,
+        ]);
+
+        event(new Registered($push));
         return back()->with('message', 'Successfully Created');
     }
 
-    /********************************************************************************* users  *******************************************************************/ 
+    /********************************************************************************* users  *******************************************************************/
 
     public function users()
     {
@@ -78,6 +99,23 @@ class AdminController extends Controller
         return view('admin.user.edit', compact('user'));
     }
 
+    public function createUser(Request $request)
+    {
+        $validated = $request->validate([
+            'username' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'max:255'],
+            'role' => ['required', 'string', 'max:255'],
+            'type' => ['required', 'string', 'max:255'],
+            "created_at" => Carbon::now(),
+            "updated_at" => Carbon::now(),
+        ]);
+        $validated['password'] = bcrypt($validated['password']);
+        $validated = User::create($validated);
+        return back()->with('message', 'Successfully Created');
+    }
+
     public function update(Request $request, User $user, int $id)
     {
         $user = User::findorFail($id);
@@ -85,8 +123,23 @@ class AdminController extends Controller
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->role = $request->input('role');
+        $user->type = $request->input('type');
         $user->save();
 
         return view('admin.user.edit', compact('user'))->with('message', 'Successfully Update');
     }
+
+
+    /********************************************************************************* dashboard  *******************************************************************/
+
+    public function dashboard()
+    {
+
+        if (Auth::user()->role === 'admin') {
+            return view('admin.dashboard.index');
+        }
+        return view('error.404');
+    }
+
+    
 }

@@ -2,16 +2,11 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
 
-    {{-- <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboards') }}
-        </h2>
-    </x-slot> --}}
 
     <div class="py-6">
         <div class="mx-auto sm:px-6 lg:px-8">
             <div class="p-3 bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                {{-- <x-welcome /> --}}
+
                 <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
                     <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
                         <div class="overflow-hidden ">
@@ -24,7 +19,11 @@
                                         </th>
                                         <th scope="col"
                                             class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                            Reason
+                                            Title
+                                        </th>
+                                        <th scope="col"
+                                            class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                            Description
                                         </th>
                                         <th scope="col"
                                             class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
@@ -33,10 +32,6 @@
                                         <th scope="col"
                                             class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                             Time Start
-                                        </th>
-                                        <th scope="col"
-                                            class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                            Time End
                                         </th>
                                         <th scope="col"
                                             class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
@@ -53,34 +48,34 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($events as $event)
+                                    @foreach ($appointments as $appointment)
                                         <tr class="bg-gray-100 border-b">
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                {{ $event->id }}
+                                                {{ $appointment->id }}
                                             </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                {{ $event->reason }}
+                                                {{ $appointment->title }}
                                             </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                {{ $event->date }}
+                                                {{ $appointment->description }}
                                             </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                {{ $event->time_start }}
+                                                {{ $appointment->date }}
                                             </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                {{ $event->time_end }}
+                                                {{ $appointment->time }}
                                             </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                {{ $event->status }}
+                                                {{ $appointment->status }}
                                             </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                {{ $event->created_at }}
+                                                {{ $appointment->created_at }}
                                             </td>
                                             <td class="text-sm text-gray-900 font-light py-4 whitespace-nowrap">
                                                 <div class="flex">
 
                                                     <div class="block">
-                                                        <a href="{{ route('admin.edit-request', $event->id) }}" class="text-yellow-400 flex">
+                                                        <a href="{{ route('admin.edit-request', $appointment->id) }}" class="text-yellow-400 flex">
                                                                 <svg fill="#FACC15" class="w-5 h-5 mx-1"
                                                                     viewBox="0 0 24 24"
                                                                     xmlns="http://www.w3.org/2000/svg">
@@ -109,7 +104,7 @@
                                                                 </path>
                                                             </svg>
 
-                                                            <button type="submit">Rejected</button>
+                                                            <button type="submit">Delete</button>
                                                         </form>
                                                     
                                                 </div>
