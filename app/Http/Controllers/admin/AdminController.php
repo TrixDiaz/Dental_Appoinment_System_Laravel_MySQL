@@ -47,19 +47,7 @@ class AdminController extends Controller
 
     public function store(Request $request)
     {
-        // $validated = $request->validate([
-        //     "name" => ['required'],
-        //     "title" => ['required'],
-        //     "description" => ['required'],
-        //     "date" => ['required'],
-        //     "doctor" => ['required'],
-        //     "time" => ['required'],
-        //     "created_at" => Carbon::now(),
-        //     "updated_at" => Carbon::now(),
-        // ]);
-        // $validated = Appointment::create($validated);
-
-        $validation = Validator::make($request->all(), [
+        Validator::make($request->all(), [
             'name'  =>  'required|string|max:191',
             'title'  =>  'required|string|max:191',
             'description'   =>  'required|string|max:191',
@@ -68,7 +56,6 @@ class AdminController extends Controller
             'time' => ['required', 'string', 'max:255'],
         ]);
 
-        
         $push  = Appointment::create([
             'name' => $request->name,
             'title' => $request->title,
@@ -93,11 +80,6 @@ class AdminController extends Controller
         return view('error.404');
     }
 
-    public function usersEdit($id)
-    {
-        $user = User::findorFail($id);
-        return view('admin.user.edit', compact('user'));
-    }
 
     public function createUser(Request $request)
     {
@@ -116,6 +98,12 @@ class AdminController extends Controller
         return back()->with('message', 'Successfully Created');
     }
 
+    public function usersEdit($id)
+    {
+        $user = User::findorFail($id);
+        return view('admin.user.edit', compact('user'));
+    }
+
     public function update(Request $request, User $user, int $id)
     {
         $user = User::findorFail($id);
@@ -126,7 +114,7 @@ class AdminController extends Controller
         $user->type = $request->input('type');
         $user->save();
 
-        return view('admin.user.edit', compact('user'))->with('message', 'Successfully Update');
+        return back()->with('update','Successfully Update', compact('user'));
     }
 
 
