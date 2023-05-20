@@ -13,12 +13,20 @@ return new class extends Migration
     {
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
+<<<<<<< HEAD
             $table->string('date');
             $table->string('time');
             $table->string('description');
             $table->string('name');
             $table->string('title');
             $table->string('doctor')->nullable();
+=======
+            $table->string('date')->nullable();
+            $table->string('time')->nullable();
+            $table->string('description')->nullable();
+            $table->string('name')->nullable();
+            $table->string('title')->nullable();
+>>>>>>> parent of fa270ac (add doctors to appoinment)
             $table->string('status')->default('pending');
             $table->timestamps();
         });
