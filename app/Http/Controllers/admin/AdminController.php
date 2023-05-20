@@ -44,42 +44,6 @@ class AdminController extends Controller
         return view('admin.edit-request', compact('appointments'))->with('message', 'Successfully Update');
     }
 
-<<<<<<< HEAD
-    public function store(Request $request)
-    {
-        // $validated = $request->validate([
-        //     "name" => ['required'],
-        //     "title" => ['required'],
-        //     "description" => ['required'],
-        //     "date" => ['required'],
-        //     "doctor" => ['required'],
-        //     "time" => ['required'],
-        //     "created_at" => Carbon::now(),
-        //     "updated_at" => Carbon::now(),
-        // ]);
-        // $validated = Appointment::create($validated);
-
-        $validation = Validator::make($request->all(), [
-            'name'  =>  'required|string|max:191',
-            'title'  =>  'required|string|max:191',
-            'description'   =>  'required|string|max:191',
-            'date' => ['required', 'string', 'max:255'],
-            'doctor' => ['required', 'string', 'max:255'],
-            'time' => ['required', 'string', 'max:255'],
-        ]);
-
-        
-        $push  = Appointment::create([
-            'name' => $request->name,
-            'title' => $request->title,
-            'description' => $request->description,
-            'date' => $request->date,
-            'doctor' => $request->doctor,
-            'time' => $request->time,
-        ]);
-
-        event(new Registered($push));
-=======
     public function store(Request $request){
 
      $validated = $request->validate([
@@ -92,7 +56,6 @@ class AdminController extends Controller
             "updated_at" => Carbon::now(),
      ]);
         $validated = Appointment::create($validated);
->>>>>>> parent of fa270ac (add doctors to appoinment)
         return back()->with('message', 'Successfully Created');
     }
 
@@ -113,26 +76,6 @@ class AdminController extends Controller
         return view('admin.user.edit', compact('user'));
     }
 
-<<<<<<< HEAD
-    public function createUser(Request $request)
-    {
-        $validated = $request->validate([
-            'username' => ['required', 'string', 'max:255'],
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'max:255'],
-            'role' => ['required', 'string', 'max:255'],
-            'type' => ['required', 'string', 'max:255'],
-            "created_at" => Carbon::now(),
-            "updated_at" => Carbon::now(),
-        ]);
-        $validated['password'] = bcrypt($validated['password']);
-        $validated = User::create($validated);
-        return back()->with('message', 'Successfully Created');
-    }
-
-=======
->>>>>>> parent of fa270ac (add doctors to appoinment)
     public function update(Request $request, User $user, int $id)
     {
         $user = User::findorFail($id);
