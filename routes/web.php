@@ -4,6 +4,7 @@ use Spatie\GoogleCalendar\Event;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\admin\MailController;
 use App\Http\Controllers\admin\AdminController;
 
 /*
@@ -56,4 +57,8 @@ Route::controller(AdminController::class)->group(function () {
     // dashboard folder 
     Route::get('/adminDashboard', 'dashboard')->name('admin.dashboard.index');
     Route::post('/createUser', 'createUser');
+});
+
+Route::controller(MailController::class)->group(function () {
+    Route::get('/send-mail', 'index');
 });
