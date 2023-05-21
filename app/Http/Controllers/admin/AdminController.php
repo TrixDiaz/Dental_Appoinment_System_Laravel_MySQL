@@ -149,9 +149,12 @@ class AdminController extends Controller
 
     public function dashboard()
     {
-
+        $appointments = Appointment::where('status', '=', 'pending')->count();
+        $doctors = User::where('type', '=', 'doctor')->count();
+        $users = User::count();
+    
         if (Auth::user()->role === 'admin') {
-            return view('admin.dashboard.index');
+            return view('admin.dashboard.index', compact('appointments','users','doctors'));
         }
         return view('error.404');
     }
