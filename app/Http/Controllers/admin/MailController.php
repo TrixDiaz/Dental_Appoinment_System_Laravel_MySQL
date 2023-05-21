@@ -12,20 +12,16 @@ use App\Notifications\UpdateNotification;
 
 class MailController extends Controller
 {
-    public function index(){
-        // $mailData = [
-        //     'title' => 'Mail from Me',
-        //     'body' => 'This is for Testing Email',
-        // ];
-
-        // Mail::to('johndarlucio@icloud.com')->send(new MailNotification($mailData));
-
-        // dd('Email send successfully');
+    public function index($id){
 
         $user = User::find(1);
-
-        $message['hi'] = "This is update from the System {$user->name}";
+        
+        if($user){
+        $message['hi'] = "This is an update from the System {$user->name}";
+        $message['event'] = "Please click the Link Below to see the Update on your Appointment {$user->name}";
         $user->notify(new UpdateNotification($message));
         dd('Email send successfully');
+
+        }
     }
 }

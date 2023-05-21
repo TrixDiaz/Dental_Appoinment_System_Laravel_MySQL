@@ -38,8 +38,8 @@ class UpdateNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
                     ->line($this->message['hi'])
+                    ->line($this->message['event'])
                     ->action('Notification Action', url('/dashboard'))
                     ->line('Thank you for using our application!');
     }
