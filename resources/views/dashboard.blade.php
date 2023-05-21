@@ -120,7 +120,7 @@
                         <hr>
                     </div>
 
-                    <form action="/store" method="POST"
+                    <form action="/check-availability" method="POST"
                         onsubmit="return confirm('There is no Cancellation for Booking and it takes maximum an Hour. Are you Sure?');">
                         @csrf
                         <input type="text" name="name" value="{{ $user = Auth::user()->name }}" hidden>
@@ -163,7 +163,7 @@
                                         clip-rule="evenodd"></path>
                                 </svg>
                             </div>
-                            <input datepicker type="text" name="date"
+                            <input  type="date" name="date" id="date"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="Select date" required>
                         </div>
@@ -221,6 +221,28 @@
     <script>
         $(document).ready(function() {
             $('#myTable').DataTable();
+        });
+    </script>
+
+    <script>
+        document.addEventListerner('DOMContentLoaded',function() {
+            const dateInput = document.getElementByID('date');
+            const dateInput = document.getElementByID('time');
+
+            dateInput.addEventListerner('change',function() {
+                const selectedDate = this.value;
+                const selectedTime = timeSelect.value;
+
+                $.post(" {{route ('check-availability')}}", {date: selectedDate, time: selectedTime})
+                 .done(function(response) {
+                    if(response.status === 'not available') {
+                        timeSelect.querySelector('option[value="' + selectTime + '"]').disabled = true;
+                    }
+                })
+                .fail(function() {
+                    console.log('Error occured while cheking availalbility');
+                });
+            });
         });
     </script>
 

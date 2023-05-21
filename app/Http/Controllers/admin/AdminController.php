@@ -53,7 +53,8 @@ class AdminController extends Controller
 
     public function store(Request $request)
     {
-        Validator::make($request->all(), [
+     
+     Validator::make($request->all(), [
             'name'  =>  'required|string|max:191',
             'title'  =>  'required|string|max:191',
             'description'   =>  'required|string|max:191',
@@ -135,5 +136,6 @@ class AdminController extends Controller
         return view('error.404');
     }
 
+    
     
 }

@@ -4,6 +4,7 @@ use Spatie\GoogleCalendar\Event;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 use App\Http\Controllers\admin\MailController;
 use App\Http\Controllers\admin\AdminController;
 
@@ -51,14 +52,28 @@ Route::controller(AdminController::class)->group(function () {
     Route::get('/Users/{id}', 'usersEdit')->name('admin.user.edit'); // users show by id
     Route::put('/Users/{id}', 'update'); //users update 
     Route::post('/store', 'store')->name('admin.store'); // store appointment
+    
     // admin functions 
     Route::get('/event-edit/{id}', 'requestEdit')->name('admin.edit-request');
     Route::put('/event-edit/{id}', 'requestUpdate'); //request update 
     // dashboard folder 
     Route::get('/adminDashboard', 'dashboard')->name('admin.dashboard.index');
     Route::post('/createUser', 'createUser');
+
+    Route::post('/check-availability', function (Request $request) {
+        $date = $request->input('date');
+        $time = $request->input('time');
+
+        // Check the availability for the selected date and time
+        // Your availability logic here
+
+        // Assuming availability check passed
+        $status = 'not available';
+
+        return response()->json(['status' => $status]);
+    })->name('check-availability');
 });
 
 Route::controller(MailController::class)->group(function () {
-    Route::get('/send-mail', 'index');
+    Route::get('send-mail', 'index');
 });
