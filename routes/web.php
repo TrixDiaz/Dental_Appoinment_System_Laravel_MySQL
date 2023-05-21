@@ -75,5 +75,5 @@ Route::controller(AdminController::class)->group(function () {
 });
 
 Route::controller(MailController::class)->group(function () {
-    Route::get('send-mail', 'index');
+    Route::get('/send-mail', 'index');
 });
