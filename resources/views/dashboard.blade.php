@@ -120,7 +120,7 @@
                         <hr>
                     </div>
 
-                    <form action="/check-availability" method="POST"
+                    <form action="/store" method="POST"
                         onsubmit="return confirm('There is no Cancellation for Booking and it takes maximum an Hour. Are you Sure?');">
                         @csrf
                         <input type="text" name="name" value="{{ $user = Auth::user()->name }}" hidden>
@@ -224,7 +224,7 @@
         });
     </script>
 
-    <script>
+    {{-- <script>
         document.addEventListerner('DOMContentLoaded',function() {
             const dateInput = document.getElementByID('date');
             const dateInput = document.getElementByID('time');
@@ -236,7 +236,7 @@
                 $.post(" {{route ('check-availability')}}", {date: selectedDate, time: selectedTime})
                  .done(function(response) {
                     if(response.status === 'not available') {
-                        timeSelect.querySelector('option[value="' + selectTime + '"]').disabled = true;
+                        timeSelect.querySelector('option[value="' + selectedTime + '"]').disabled = true;
                     }
                 })
                 .fail(function() {
@@ -244,7 +244,7 @@
                 });
             });
         });
-    </script>
+    </script> --}}
 
 
 </x-app-layout>

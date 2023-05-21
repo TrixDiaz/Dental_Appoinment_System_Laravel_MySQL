@@ -60,18 +60,21 @@ Route::controller(AdminController::class)->group(function () {
     Route::get('/adminDashboard', 'dashboard')->name('admin.dashboard.index');
     Route::post('/createUser', 'createUser');
 
-    Route::post('/check-availability', function (Request $request) {
-        $date = $request->input('date');
-        $time = $request->input('time');
+    // Route::post('/check-availability', function (Request $request) {
+    //     $date = $request->input('date');
+    //     $time = $request->input('time');
 
-        // Check the availability for the selected date and time
-        // Your availability logic here
+    //     DB::table('appointment')
+    //         ->select('date')
+    //         ->get();
+    //     // Check the availability for the selected date and time
+    //     // Your availability logic here
 
-        // Assuming availability check passed
-        $status = 'not available';
+    //     // Assuming availability check passed
+    //     $status = 'not available';
 
-        return response()->json(['status' => $status]);
-    })->name('check-availability');
+    //     return response()->json(['status' => $status]);
+    // })->name('check-availability');
 });
 
 Route::controller(MailController::class)->group(function () {

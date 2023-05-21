@@ -18,7 +18,7 @@ class AdminController extends Controller
 {
     public function index()
     {
-        
+
         $appointments = Appointment::all();
         if (Auth::user()->role === 'admin') {
             return view('admin.index', compact('appointments'));
@@ -33,7 +33,7 @@ class AdminController extends Controller
             ->where('type', '=', 'doctor')
             ->get();
         $appointments = Appointment::findorFail($id);
-        return view('admin.edit-request', compact('appointments','doctors'));
+        return view('admin.edit-request', compact('appointments', 'doctors'));
     }
 
     public function requestUpdate(Request $request, Appointment $appointments, int $id)
@@ -53,8 +53,28 @@ class AdminController extends Controller
 
     public function store(Request $request)
     {
-     
-     Validator::make($request->all(), [
+
+        // Define the date and time to check
+        $dateToCheck = '06/03/2023';
+      //  $timeToCheck = '12:00:00';
+
+        // Combine the date and time into a single DateTime object
+       // $dateTimeToCheck = $dateToCheck . ' ' . $timeToCheck;
+
+        // Retrieve records from the database that match the given date and time
+        $records = Appointment::where('date', $dateToCheck)->get();
+
+        // Validate if any records were returned
+        if ($records->isEmpty()) {
+            // Date and time not stored in the database
+            echo 'The date and time are not stored in the database.';
+        } else {
+            // Date and time already exists in the database
+            echo 'The date and time are already stored in the database.';
+        }
+
+
+        Validator::make($request->all(), [
             'name'  =>  'required|string|max:191',
             'title'  =>  'required|string|max:191',
             'description'   =>  'required|string|max:191',
@@ -121,7 +141,7 @@ class AdminController extends Controller
         $user->type = $request->input('type');
         $user->save();
 
-        return back()->with('update','Successfully Update', compact('user'));
+        return back()->with('update', 'Successfully Update', compact('user'));
     }
 
 
@@ -135,7 +155,4 @@ class AdminController extends Controller
         }
         return view('error.404');
     }
-
-    
-    
 }
