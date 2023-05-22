@@ -68,13 +68,6 @@ class AdminController extends Controller
 
     public function store(Request $request)
     {
-
-        // $users = DB::table('users')
-        //     ->join('appointments', 'users.email', '=', 'appointments.email')
-        //     ->select('users.*', 'appointments.*')
-        //     ->where('users.email', '=', 'appointments.email')
-        //     ->get();
-        // $users = Auth::user()->name;
         $users = Auth::check();
         $user = User::findorFail($users);
 
@@ -82,7 +75,7 @@ class AdminController extends Controller
         {
 
             $message['hi'] = "This is an update from the System - {$user->name}";
-            $message['event'] = "Please click the Link Below to see the your Created Appointment in Acebedo Clinic - {$user->name}";
+            $message['event'] = "and will serve as confirmation for your Appointment Request for Acebedo Clinic link provided below - {$user->name}";
             $user->notify(new UpdateNotification($message));
 
             Validator::make($request->all(), [
