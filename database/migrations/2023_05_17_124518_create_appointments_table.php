@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('time');
             $table->string('description');
             $table->string('name');
+            $table->string('email');
             $table->string('title');
             $table->string('doctor')->nullable();
             $table->string('status')->default('pending');

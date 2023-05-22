@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
+use App\Notifications\UpdateNotification;
 use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
@@ -38,7 +39,21 @@ class AdminController extends Controller
 
     public function requestUpdate(Request $request, Appointment $appointments, int $id)
     {
+
         $appointments = Appointment::findorFail($id);
+
+        // $users = DB::table('users')
+        //     ->join('appointments', 'users.email', '=', 'appointments.email')
+        //     ->select('users.*', 'appointments.*')
+        //     ->where('users.email', '=', 'appointments.email')
+        //     ->get();
+
+        // $appointments->users()->sync($users);
+        // $user = User::findorFail($users);
+
+        // $message['hi'] = "This is an update from the System - {$user->name}";
+        // $message['event'] = "Please click the Link Below to see the Update on your Appointment - {$user->name}";
+        // $user->notify(new UpdateNotification($message));
 
         $appointments->description = $request->input('title');
         $appointments->description = $request->input('description');
@@ -54,46 +69,47 @@ class AdminController extends Controller
     public function store(Request $request)
     {
 
-        // Define the date and time to check
-        $dateToCheck = '06/03/2023';
-      //  $timeToCheck = '12:00:00';
+        // $users = DB::table('users')
+        //     ->join('appointments', 'users.email', '=', 'appointments.email')
+        //     ->select('users.*', 'appointments.*')
+        //     ->where('users.email', '=', 'appointments.email')
+        //     ->get();
+        // $users = Auth::user()->name;
+        $users = Auth::check();
+        $user = User::findorFail($users);
 
-        // Combine the date and time into a single DateTime object
-       // $dateTimeToCheck = $dateToCheck . ' ' . $timeToCheck;
+        if($user)
+        {
 
-        // Retrieve records from the database that match the given date and time
-        $records = Appointment::where('date', $dateToCheck)->get();
+            $message['hi'] = "This is an update from the System - {$user->name}";
+            $message['event'] = "Please click the Link Below to see the your Created Appointment in Acebedo Clinic - {$user->name}";
+            $user->notify(new UpdateNotification($message));
 
-        // Validate if any records were returned
-        if ($records->isEmpty()) {
-            // Date and time not stored in the database
-            echo 'The date and time are not stored in the database.';
-        } else {
-            // Date and time already exists in the database
-            echo 'The date and time are already stored in the database.';
+            Validator::make($request->all(), [
+                'name'  =>  'required|string|max:191',
+                'email'  =>  'required|string|max:191',
+                'title'  =>  'required|string|max:191',
+                'description'   =>  'required|string|max:191',
+                'date' => ['required', 'string', 'max:255'],
+                'doctor' => ['required', 'string', 'max:255'],
+                'time' => ['required', 'string', 'max:255'],
+            ]);
+
+            $push  = Appointment::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'title' => $request->title,
+                'description' => $request->description,
+                'date' => $request->date,
+                'doctor' => $request->doctor,
+                'time' => $request->time,
+            ]);
+            event(new Registered($push));
+
+            return back()->with('message', 'Successfully Created');
         }
 
-
-        Validator::make($request->all(), [
-            'name'  =>  'required|string|max:191',
-            'title'  =>  'required|string|max:191',
-            'description'   =>  'required|string|max:191',
-            'date' => ['required', 'string', 'max:255'],
-            'doctor' => ['required', 'string', 'max:255'],
-            'time' => ['required', 'string', 'max:255'],
-        ]);
-
-        $push  = Appointment::create([
-            'name' => $request->name,
-            'title' => $request->title,
-            'description' => $request->description,
-            'date' => $request->date,
-            'doctor' => $request->doctor,
-            'time' => $request->time,
-        ]);
-
-        event(new Registered($push));
-        return back()->with('message', 'Successfully Created');
+        return back()->with('delete', 'Something went wrong!');
     }
 
     /********************************************************************************* users  *******************************************************************/
@@ -135,13 +151,20 @@ class AdminController extends Controller
     {
         $user = User::findorFail($id);
 
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        $user->role = $request->input('role');
-        $user->type = $request->input('type');
-        $user->save();
+        if ($user) {
 
-        return back()->with('update', 'Successfully Update', compact('user'));
+            $message['hi'] = "This is an update from the System - {$user->name}";
+            $message['event'] = "Please click the Link Below to see the Update on your Profile - {$user->name}";
+            $user->notify(new UpdateNotification($message));
+
+            $user->name = $request->input('name');
+            $user->email = $request->input('email');
+            $user->role = $request->input('role');
+            $user->type = $request->input('type');
+            $user->save();
+
+            return back()->with('update', 'Successfully Update', compact('user'));
+        }
     }
 
 
@@ -152,9 +175,9 @@ class AdminController extends Controller
         $appointments = Appointment::where('status', '=', 'pending')->count();
         $doctors = User::where('type', '=', 'doctor')->count();
         $users = User::count();
-    
+
         if (Auth::user()->role === 'admin') {
-            return view('admin.dashboard.index', compact('appointments','users','doctors'));
+            return view('admin.dashboard.index', compact('appointments', 'users', 'doctors'));
         }
         return view('error.404');
     }
