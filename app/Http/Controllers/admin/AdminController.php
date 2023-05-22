@@ -45,15 +45,14 @@ class AdminController extends Controller
         // $users = DB::table('users')
         //     ->join('appointments', 'users.email', '=', 'appointments.email')
         //     ->select('users.*', 'appointments.*')
-        //     ->where('users.email', '=', 'appointments.email')
-        //     ->get();
+        //     ->where($appointments, '=', 'appointments.id')
+        //     ->find(1);
 
-        // $appointments->users()->sync($users);
-        // $user = User::findorFail($users);
+        $user = User::findorFail(1);
 
-        // $message['hi'] = "This is an update from the System - {$user->name}";
-        // $message['event'] = "Please click the Link Below to see the Update on your Appointment - {$user->name}";
-        // $user->notify(new UpdateNotification($message));
+        $message['hi'] = "This is an update from the System - {$user->name}";
+        $message['event'] = "Please click the Link Below to see the Update on your Appointment - {$user->name}";
+        $user->notify(new UpdateNotification($message));
 
         $appointments->description = $request->input('title');
         $appointments->description = $request->input('description');
