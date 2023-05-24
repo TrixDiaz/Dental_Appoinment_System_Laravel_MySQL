@@ -44,9 +44,9 @@ class AdminController extends Controller
 
         $count = Appointment::join('users', function ($join) {
             $join->on('appointments.name', '=', 'users.name')
-            ->on('appointments.email', '=', 'users.email');
+                ->on('appointments.email', '=', 'users.email');
         })
-        ->count();   
+            ->count();
 
 
         $user = User::findorFail($count);
@@ -172,5 +172,13 @@ class AdminController extends Controller
             return view('admin.dashboard.index', compact('appointments', 'users', 'doctors'));
         }
         return view('error.404');
+    }
+
+
+    /********************************************************************************* Calendar  *******************************************************************/
+
+    public function calendar()
+    {
+        return view('calendar.index');
     }
 }

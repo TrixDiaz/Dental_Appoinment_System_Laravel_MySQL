@@ -59,6 +59,8 @@ Route::controller(AdminController::class)->group(function () {
     // dashboard folder 
     Route::get('/adminDashboard', 'dashboard')->name('admin.dashboard.index');
     Route::post('/createUser', 'createUser');
+    // Calendar 
+    Route::get('/calendar', 'calendar')->name('calendar.index');
 
     // Route::post('/check-availability', function (Request $request) {
     //     $date = $request->input('date');

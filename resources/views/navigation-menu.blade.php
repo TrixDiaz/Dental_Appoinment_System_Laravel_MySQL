@@ -33,7 +33,15 @@
                             </x-nav-link>
                         </div>
                     @endif
-                @endif
+                @endif 
+
+                @if (Route::has('calendar.index'))
+                        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                            <x-nav-link href="{{ route('calendar.index') }}" :active="request()->routeIs('calendar.index')">
+                                {{ __('Calendar') }}
+                            </x-nav-link>
+                        </div>
+                    @endif
             </div>
 
 
