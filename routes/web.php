@@ -61,8 +61,6 @@ Route::controller(AdminController::class)->group(function () {
     Route::post('/createUser', 'createUser');
     // Calendar 
     Route::get('/calendar', 'calendar')->name('calendar.index');
-    Route::post('/calendar/action', 'action')->name('calendar.action');
-
     // Route::post('/check-availability', function (Request $request) {
     //     $date = $request->input('date');
     //     $time = $request->input('time');
