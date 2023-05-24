@@ -81,16 +81,6 @@
                 timeOut: 7000
             })
         </script>
-        @else
-        <script>
-            toastr.options = {
-                "progressBar": true,
-                "closeButton": true,
-            }
-            toastr.delete("{{ Session::get('Something Went wrong!') }}", 'Success!', {
-                timeOut: 7000
-            })
-        </script>
     @endif
 </body>
 
