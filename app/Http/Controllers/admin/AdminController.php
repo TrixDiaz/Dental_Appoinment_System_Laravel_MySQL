@@ -4,8 +4,9 @@ namespace App\Http\Controllers\admin;
 
 use Carbon\Carbon;
 use App\Models\User;
-use App\Models\Appointment;
+use App\Models\Event;
 // use Illuminate\Support\Carbon;
+use App\Models\Appointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -177,8 +178,56 @@ class AdminController extends Controller
 
     /********************************************************************************* Calendar  *******************************************************************/
 
-    public function calendar()
+    public function calendar(Request $request)
     {
-        return view('calendar.index');
+        
+        if ($request->ajax()) {
+            $data = Event::whereDate('start', '>=', $request->start)
+                ->whereDate('end',   '<=', $request->end)
+                ->get(['id', 'title', 'start', 'end']);
+            return response()->json($data);
+        }
+
+        $events = array();
+        $bookings = Event::all();
+        foreach($bookings as $booking){
+            $events[] = [
+               'title' => $booking->title,
+               'start' => $booking->start,
+               'end' => $booking->end,
+            ];
+        }
+        return view('calendar.index', compact('events'));
+    }
+
+    public function action(Request $request)
+    {
+        if ($request->ajax()) {
+            if ($request->type == 'add') {
+                $event = Event::create([
+                    'title'        =>    $request->title,
+                    'start'        =>    $request->start,
+                    'end'        =>    $request->end
+                ]);
+
+                return response()->json($event);
+            }
+
+            if ($request->type == 'update') {
+                $event = Event::find($request->id)->update([
+                    'title'        =>    $request->title,
+                    'start'        =>    $request->start,
+                    'end'        =>    $request->end
+                ]);
+
+                return response()->json($event);
+            }
+
+            if ($request->type == 'delete') {
+                $event = Event::find($request->id)->delete();
+
+                return response()->json($event);
+            }
+        }
     }
 }
