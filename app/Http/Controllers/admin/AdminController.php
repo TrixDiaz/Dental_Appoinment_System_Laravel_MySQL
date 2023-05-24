@@ -42,13 +42,14 @@ class AdminController extends Controller
 
         $appointments = Appointment::findorFail($id);
 
-        // $users = DB::table('users')
-        //     ->join('appointments', 'users.email', '=', 'appointments.email')
-        //     ->select('users.*', 'appointments.*')
-        //     ->where($appointments, '=', 'appointments.id')
-        //     ->find(1);
+        $count = Appointment::join('users', function ($join) {
+            $join->on('appointments.name', '=', 'users.name')
+            ->on('appointments.email', '=', 'users.email');
+        })
+        ->count();   
 
-        $user = User::findorFail(1);
+
+        $user = User::findorFail($count);
 
         $message['hi'] = "This is an update from the System - {$user->name}";
         $message['event'] = "Please click the Link Below to see the Update on your Appointment - {$user->name}";
@@ -70,8 +71,7 @@ class AdminController extends Controller
         $users = Auth::check();
         $user = User::findorFail($users);
 
-        if($user)
-        {
+        if ($user) {
 
             $message['hi'] = "This is an update from the System - {$user->name}";
             $message['event'] = "and will serve as confirmation for your Appointment Request for Acebedo Clinic link provided below - {$user->name}";
