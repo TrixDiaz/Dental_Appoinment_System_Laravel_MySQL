@@ -31,11 +31,11 @@
                                         </th>
                                         <th scope="col"
                                             class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                            Request Date
+                                            Start Date Time
                                         </th>
                                         <th scope="col"
                                             class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                            Time Start
+                                            End Date Time
                                         </th>
                                         <th scope="col"
                                             class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
@@ -71,10 +71,10 @@
                                                 {{ $appointment->description }}
                                             </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                {{ $appointment->date }}
+                                                {{ $appointment->start }}
                                             </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                {{ $appointment->time }}
+                                                {{ $appointment->end }}
                                             </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                                 {{ $appointment->status }}

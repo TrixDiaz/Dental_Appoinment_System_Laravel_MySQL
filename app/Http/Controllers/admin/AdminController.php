@@ -56,11 +56,11 @@ class AdminController extends Controller
         $message['event'] = "Please click the Link Below to see the Update on your Appointment - {$user->name}";
         $user->notify(new UpdateNotification($message));
 
-        $appointments->description = $request->input('title');
+        $appointments->title = $request->input('title');
         $appointments->description = $request->input('description');
-        $appointments->date = $request->input('date');
-        $appointments->time = $request->input('time');
-        $appointments->status = $request->input('doctor');
+        $appointments->start = $request->input('start');
+        $appointments->end = $request->input('end');
+        $appointments->doctor = $request->input('doctor');
         $appointments->status = $request->input('status');
         $appointments->save();
 
@@ -77,15 +77,15 @@ class AdminController extends Controller
             $message['hi'] = "This is an update from the System - {$user->name}";
             $message['event'] = "and will serve as confirmation for your Appointment Request for Acebedo Clinic link provided below - {$user->name}";
             $user->notify(new UpdateNotification($message));
-
+            
             Validator::make($request->all(), [
                 'name'  =>  'required|string|max:191',
                 'email'  =>  'required|string|max:191',
                 'title'  =>  'required|string|max:191',
                 'description'   =>  'required|string|max:191',
-                'date' => ['required', 'string', 'max:255'],
-                'doctor' => ['required', 'string', 'max:255'],
-                'time' => ['required', 'string', 'max:255'],
+                'start' => ['required'],
+                'doctor' => ['required'],
+                'end' => ['required', 'string', 'max:255'],
             ]);
 
             $push  = Appointment::create([
@@ -93,9 +93,9 @@ class AdminController extends Controller
                 'email' => $request->email,
                 'title' => $request->title,
                 'description' => $request->description,
-                'date' => $request->date,
+                'start' => $request->start,
                 'doctor' => $request->doctor,
-                'time' => $request->time,
+                'end' => $request->end,
             ]);
             event(new Registered($push));
 
@@ -182,12 +182,13 @@ class AdminController extends Controller
     {
 
         $events = array();
-        $bookings = Event::all();
+        $bookings = Appointment::all();
         foreach($bookings as $booking){
             $events[] = [
                'title' => $booking->title,
                'start' => $booking->start,
                'end' => $booking->end,
+               'name' => $booking->name,
             ];
         }
         return view('calendar.index', compact('events'));

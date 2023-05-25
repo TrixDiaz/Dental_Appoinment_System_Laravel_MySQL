@@ -59,8 +59,8 @@
                                 <label for="request-date" class="block text-sm font-medium text-gray-700">Request Date
                                 </label>
                                 <div class="mt-1">
-                                    <input type="text" id="date" name="date"
-                                        value="{{ $appointments->date }}"
+                                    <input type="dateTime-local" id="start" name="start"
+                                        value="{{ $appointments->start }}"
                                         class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                                 </div>
                                 @error('request-date')
@@ -68,7 +68,21 @@
                                 @enderror
                             </div>
 
-                            <div class="my-3">
+
+                            <div class="sm:col-span-6">
+                                <label for="request-date" class="block text-sm font-medium text-gray-700">Request Date
+                                </label>
+                                <div class="mt-1">
+                                    <input type="dateTime-local" id="end" name="end"
+                                        value="{{ $appointments->end }}"
+                                        class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                                </div>
+                                @error('request-date')
+                                    <span class="text-red-400 text-sm"></span>
+                                @enderror
+                            </div>
+
+                            {{-- <div class="my-3">
                             <label for="time"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an Time
                                 Frame</label>
@@ -81,7 +95,7 @@
                                 <option value="11:00am - 12:00pm">11:00am - 12:00pm</option>
                                 <option value="12:30pm - 1:30pm">12:30pm - 1:30pm</option>
                             </select>
-                        </div>
+                        </div> --}}
 
                         <div class="my-3">
                             <label for="doctor"

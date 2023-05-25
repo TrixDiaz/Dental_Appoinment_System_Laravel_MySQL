@@ -77,7 +77,7 @@
                 "progressBar": true,
                 "closeButton": true,
             }
-            toastr.delete("{{ Session::get('delete') }}", 'Success!', {
+            toastr.delete("{{ Session::get('Something went wrong!') }}", 'Success!', {
                 timeOut: 7000
             })
         </script>

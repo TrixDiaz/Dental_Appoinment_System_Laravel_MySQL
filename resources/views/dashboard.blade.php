@@ -86,11 +86,11 @@
                                                         </td>
                                                         <td
                                                             class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                            {{ $appointment->date }}
+                                                            {{ $appointment->start }}
                                                         </td>
                                                         <td
                                                             class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                            {{ $appointment->time }}
+                                                            {{ $appointment->end }}
                                                         </td>
                                                         <td
                                                             class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
@@ -155,42 +155,50 @@
                         </label>
 
 
-                        {{-- Request Date  --}}
-                        <div class="relative max-w my-5">
-                            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400"
-                                    fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
+                        {{-- Start  Request Date  --}}
+                        
+                        <div class="flex justify-evenly">
+                            <span class="my-2 flex items-center font-semibold">Start Date and Time</span>
+                            <div class="flex justify-start w-2/5">
+                                <div class="relative w-screen my-5">
+                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                        <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                                            fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
+                                        
+                                    </div>
+                                    <input type="datetime-local" name="start" id="start"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        required>
+                                </div>
                             </div>
-                            <input datepicker name="date" id="date"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Select date" required>
+                            <span class="my-2 flex items-center font-semibold">End Date and Time</span>
+                            <div class="flex justify-end w-2/5">
+                                {{-- End  Request Date  --}}
+                                <div class="relative w-screen my-5">
+                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                        <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                                            fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
+                                    </div>
+                                    <input type="datetime-local" name="end" id="end"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        required>
+                                </div>
+                            </div>
                         </div>
-
-
-                        <div class="my-3">
-                            <label for="time"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an Time
-                                Frame</label>
-                            <select name="time" id="time" 
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                required>
-                                <option disabled selected>Choose a Time</option>
-                                <option value="8:00am - 9:00am">8:00am - 9:00am</option>
-                                <option value="9:30am - 10:30am">9:30am - 10:30am</option>
-                                <option value="11:00am - 12:00pm">11:00am - 12:00pm</option>
-                                <option value="12:30pm - 1:30pm">12:30pm - 1:30pm</option>
-                            </select>
-                        </div>
-
 
                         <div class="my-3">
                             <label for="doctor"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an Doctor</label>
-                            <select name="doctor" id="doctor" 
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an
+                                Doctor</label>
+                            <select name="doctor" id="doctor"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 required>
                                 <option disabled selected>Choose a Doctor</option>
