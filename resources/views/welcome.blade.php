@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Acebedo Optical Clinic</title>
+    <title>Eye Optical Clinic</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -31,7 +31,7 @@
             <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
                 <a href="#home" class="flex items-center">
                     <img src="./image/acebedo_logo_orig.png" class="mr-3 h-6 sm:h-9" alt="" />
-                    <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Acebedo Optical
+                    <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Eye Optical
                         Clinic</span>
                 </a>
                 <div class="flex items-center lg:order-2">
@@ -86,7 +86,7 @@
         <div class="grid py-20 px-4 mx-auto max-w-screen-xl lg:gap-8 xl:gap-0 lg:py-[8.4rem] lg:grid-cols-12">
             <div data-aos="fade-right" data-aos-duration="1000" class="place-self-center mr-auto lg:col-span-7">
                 <h1 class="mb-4 max-w-2xl text-4xl font-extrabold leading-none md:text-5xl xl:text-6xl dark:text-white">
-                    Acebedo Optical Clinic
+                    Eye Optical Clinic
                 </h1>
                 <p class="mb-6 max-w-2xl font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
                     "Your smile is our priority: Providing personalized and compassionate dental care to help you
@@ -191,10 +191,10 @@
             <div data-aos="fade-right" data-aos-duration="1000"
                 class="font-light text-gray-500 sm:text-lg dark:text-gray-400">
                 <h2 class="mb-4 text-4xl font-extrabold text-gray-900 dark:text-white">
-                    Acebedo Eye Clinic
+                    Eye Eye Clinic
                 </h2>
                 <p class="mb-4">
-                    Acebedo Eye Clinic is a premier eye care facility located
+                    Eye Eye Clinic is a premier eye care facility located
                     in the heart of the city. Our clinic is dedicated to providing
                     the highest quality of comprehensive eye care services to patients
                     of all ages. Our team of experienced and highly skilled optometrists
@@ -225,7 +225,7 @@
                 <h2 class="mb-4 text-4xl font-bold text-gray-900 dark:text-white">
                     Eye Clinic System is a technology-driven solution that aims to empower
                     people by providing them with comprehensive eye care services.
-                    <span class="font-extrabold">Acebedo Eye Clinic</span>.
+                    <span class="font-extrabold">Eye Eye Clinic</span>.
                 </h2>
                 <p class="mb-4 font-light">
                     Overall, the Eye Clinic System is an innovative solution that can empower
@@ -233,7 +233,7 @@
                     personalized treatment plans, and educational resources.
                 </p>
                 <p class="mb-4 font-medium">
-                    Come in Acebedo Dental Eye Clinic services for your sight is bright and secure.
+                    Come in Eye Optical Clinic services for your sight is bright and secure.
                 </p>
                 <a href="{{ route('login') }}"
                     class="inline-flex items-center font-medium text-primary-600 hover:text-primary-800 dark:text-primary-500 dark:hover:text-primary-700">
@@ -272,14 +272,14 @@
                         <div class="mt-12 lg:mt-0">
                             <h1 class="text-5xl md:text-6xl xl:text-7xl font-bold tracking-tight mb-12"
                                 style="color: hsl(218, 81%, 95%)">
-                                Acebedo Dental Clinic<br /><span style="color: hsl(218, 81%, 75%)">Since 1928</span>
+                                Eye Dental Clinic<br /><span style="color: hsl(218, 81%, 75%)">Since 1928</span>
                             </h1>
                             <a class="inline-block px-7 py-3 mr-2 bg-gray-200 text-gray-700 font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
                                 data-mdb-ripple="true" data-mdb-ripple-color="light" href=""
                                 role="button">Schedule your Day</a>
                         </div>
                         <div class="mb-12 lg:mb-0">
-                            <img src="https://lh3.googleusercontent.com/p/AF1QipOsgb1DK-UGdUbfYxGWSrzho9SZXRdZGTHI7z5V=w1080-h608-p-no-v0"
+                            <img src="https://res.cloudinary.com/drcyxqm6p/image/upload/v1683795466/female-patient-checking-vision-in-ophthalmological-clinic_slru0p.jpg"
                                 class="w-full rounded-lg shadow-lg" alt="" />
                         </div>
                     </div>
@@ -449,7 +449,7 @@
                 <div class="mb-6 md:mb-0">
                     <a href="https://flowbite.com" class="flex items-center">
                         <img src="./image/acebedo_logo_orig.png" class="mr-3 h-8" alt="" />
-                        <span class="self-center text-2xl font-semibold whitespace-wrap dark:text-white">Acebedo Eye
+                        <span class="self-center text-2xl font-semibold whitespace-wrap dark:text-white">Optical Eye
                             Clinic System</span>
                     </a>
                 </div>
@@ -498,7 +498,7 @@
             <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
             <div class="sm:flex sm:items-center sm:justify-between">
                 <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="#home"
-                        class="hover:underline">Acebedo Eye Clinic™</a>.
+                        class="hover:underline">Optical Eye Clinic™</a>.
                     All Rights Reserved.
                 </span>
                 <div class="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
