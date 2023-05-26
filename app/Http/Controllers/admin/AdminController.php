@@ -46,16 +46,16 @@ class AdminController extends Controller
         $count = Appointment::join('users', function ($join) {
             $join->on('appointments.name', '=', 'users.name')
                 ->on('appointments.email', '=', 'users.email');
-        })
-            ->count();
+        })->count();
 
-
+        //Sending Email notification 
         $user = User::findorFail($count);
 
         $message['hi'] = "This is an update from the System - {$user->name}";
         $message['event'] = "Please click the Link Below to see the Update on your Appointment - {$user->name}";
         $user->notify(new UpdateNotification($message));
 
+        //Update the Record
         $appointments->title = $request->input('title');
         $appointments->description = $request->input('description');
         $appointments->start = $request->input('start');
@@ -64,6 +64,33 @@ class AdminController extends Controller
         $appointments->status = $request->input('status');
         $appointments->save();
 
+        // Get the approved appointments from the appointments table
+        $approve = Appointment::where('id', $appointments, 'status', 'approved')->get();
+        // Loop through each appointment
+
+        if ($approve) {
+
+            foreach ($appointments as $appointment) {
+                // Create a new event based on the appointment data
+                $event = new Event();
+                $event->title = $appointment->title;
+                $event->description = $appointment->description;
+                $event->start = $appointment->start;
+                $event->end = $appointment->end;
+                $event->doctor = $appointment->doctor;
+                $event->status = $appointment->status;
+
+                // Save the event to the event table
+                $event->save();
+
+                // Optional: If you want to delete the appointments after inserting them into the event table
+                // Appointment::truncate();
+
+                return back()->with('message', 'Successfully Update', compact('appointments'));
+            }
+        } else {
+            return back()->with('message', 'Successfully Update', compact('appointments'));
+        }
         return back()->with('message', 'Successfully Update', compact('appointments'));
     }
 
@@ -77,7 +104,7 @@ class AdminController extends Controller
             $message['hi'] = "This is an update from the System - {$user->name}";
             $message['event'] = "and will serve as confirmation for your Appointment Request for Acebedo Clinic link provided below - {$user->name}";
             $user->notify(new UpdateNotification($message));
-            
+
             Validator::make($request->all(), [
                 'name'  =>  'required|string|max:191',
                 'email'  =>  'required|string|max:191',
@@ -182,13 +209,13 @@ class AdminController extends Controller
     {
 
         $events = array();
-        $bookings = Appointment::all();
-        foreach($bookings as $booking){
+        $bookings = Event::all();
+        foreach ($bookings as $booking) {
             $events[] = [
-               'title' => $booking->title,
-               'start' => $booking->start,
-               'end' => $booking->end,
-               'name' => $booking->name,
+                'title' => $booking->title,
+                'start' => $booking->start,
+                'end' => $booking->end,
+                'name' => $booking->name,
             ];
         }
         return view('calendar.index', compact('events'));

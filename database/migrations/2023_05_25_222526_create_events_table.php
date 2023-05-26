@@ -17,8 +17,6 @@ return new class extends Migration
             $table->string('description');
             $table->dateTime('start');
             $table->dateTime('end');
-            $table->string('name');
-            $table->string('email');
             $table->string('doctor');
             $table->string('status');
             $table->timestamps();
