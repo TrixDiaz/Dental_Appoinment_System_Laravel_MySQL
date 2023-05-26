@@ -29,7 +29,7 @@
                     @if (Route::has('admin.index'))
                         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                             <x-nav-link href="{{ route('admin.index') }}" :active="request()->routeIs('admin.index')">
-                                {{ __('Admin') }}
+                                {{ __('Appointments') }}
                             </x-nav-link>
                         </div>
                     @endif
