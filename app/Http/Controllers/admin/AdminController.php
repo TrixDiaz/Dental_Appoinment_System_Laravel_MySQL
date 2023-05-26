@@ -91,40 +91,36 @@ class AdminController extends Controller
 
     public function store(Request $request)
     {
-        $users = Auth::check();
-        $user = User::findorFail($users);
 
-        if ($user) {
+        Validator::make($request->all(), [
+            'name'  =>  'required|string|max:191',
+            'email'  =>  'required|string|max:191',
+            'title'  =>  'required|string|max:191',
+            'description'   =>  'required|string|max:191',
+            'start' => ['required'],
+            'doctor' => ['required'],
+            'end' => ['required', 'string', 'max:255'],
+        ]);
 
-            $message['hi'] = "This is an update from the System - {$user->name}";
-            $message['event'] = "and will serve as confirmation for your Appointment Request for Acebedo Clinic link provided below - {$user->name}";
-            $user->notify(new UpdateNotification($message));
+        $push  = Appointment::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'title' => $request->title,
+            'description' => $request->description,
+            'start' => $request->start,
+            $doctors = 'doctor' => $request->doctor,
+            'end' => $request->end,
+        ]);
+        event(new Registered($push));
 
-            Validator::make($request->all(), [
-                'name'  =>  'required|string|max:191',
-                'email'  =>  'required|string|max:191',
-                'title'  =>  'required|string|max:191',
-                'description'   =>  'required|string|max:191',
-                'start' => ['required'],
-                'doctor' => ['required'],
-                'end' => ['required', 'string', 'max:255'],
-            ]);
+        $doctors = User::count();
+        $user = User::findorFail($doctors);
+       
+        $message['hi'] = "This is an update from the System - {$user->name}";
+        $message['event'] = "and will serve as confirmation for your Appointment Request for Acebedo Clinic link provided below - {$user->name}";
+        $user->notify(new UpdateNotification($message));
 
-            $push  = Appointment::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'title' => $request->title,
-                'description' => $request->description,
-                'start' => $request->start,
-                'doctor' => $request->doctor,
-                'end' => $request->end,
-            ]);
-            event(new Registered($push));
-
-            return back()->with('message', 'Successfully Created');
-        }
-
-        return back()->with('delete', 'Something went wrong!');
+        return back()->with('message', 'Successfully Created');
     }
 
     /********************************************************************************* users  *******************************************************************/
