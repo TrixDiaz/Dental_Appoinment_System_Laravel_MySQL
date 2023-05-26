@@ -13,16 +13,6 @@
             <div class="p-6 bg-white overflow-hidden shadow-xl sm:rounded-lg">
 
                 <div class="grid grid-rows-3 grid-flow-col gap-4">
-                    {{-- <div
-                    class="flex justify-center row-span-3 drop-shadow-xl rounded-lg bg-white dark:bg-gray-800 overflow-hidden shadow py-5 px-5 my-5">
-                    <center>
-                        <x-nav-link :href="route('profile.show')" class="hover:bg-slate-300 rounded-full w-32 h-15"><img
-                                src='{{ Auth::user()->profile_photo_path }} ' alt="profile" class="rounded-full w-32 h-15">
-                        </x-nav-link>
-                        <p class="text-xl font-bold text-gray-900 dark:text-white">{{ Auth::user()->name }}</p>
-                        <p class="text-base font-bold text-gray-900 dark:text-white">{{ Auth::user()->email }}</h3>
-                    </center>
-                </div> --}}
                     <div
                         class="row-span-3 col-span-8 drop-shadow-xl rounded-lg bg-white dark:bg-gray-800 overflow-hidden shadow py-5 px-5 my-5">
                         <!-- component -->
