@@ -40,22 +40,10 @@ class AdminController extends Controller
 
     public function requestUpdate(Request $request, Appointment $appointments, int $id)
     {
+        // Find the appointment by ID
+        $appointments = Appointment::findOrFail($id);
 
-        $appointments = Appointment::findorFail($id);
-
-        $count = Appointment::join('users', function ($join) {
-            $join->on('appointments.name', '=', 'users.name')
-                ->on('appointments.email', '=', 'users.email');
-        })->count();
-
-        //Sending Email notification 
-        $user = User::findorFail($count);
-
-        $message['hi'] = "This is an update from the System - {$user->name}";
-        $message['event'] = "Please click the Link Below to see the Update on your Appointment - {$user->name}";
-        $user->notify(new UpdateNotification($message));
-
-        //Update the Record
+        // Update the appointment record
         $appointments->title = $request->input('title');
         $appointments->description = $request->input('description');
         $appointments->start = $request->input('start');
@@ -64,33 +52,40 @@ class AdminController extends Controller
         $appointments->status = $request->input('status');
         $appointments->save();
 
-        // Get the approved appointments from the appointments table
-        $approve = Appointment::where('id', $appointments, 'status', 'approved')->get();
-        // Loop through each appointment
+        // Check if the appointment status is approved
+        if ($appointments->status === 'Approved') {
+            // Find the user associated with the appointment
+            $user = User::where('name', $appointments->name)
+                ->where('email', $appointments->email)
+                ->firstOrFail();
 
-        if ($approve) {
+            // Sending email notification
+            $message['hi'] = "This is an update from the System - {$user->name}";
+            $message['event'] = "Please click the Link Below to see the Update on your Appointment - {$user->name}";
+            $user->notify(new UpdateNotification($message));
 
-            foreach ($appointments as $appointment) {
-                // Create a new event based on the appointment data
-                $event = new Event();
-                $event->title = $appointment->title;
-                $event->description = $appointment->description;
-                $event->start = $appointment->start;
-                $event->end = $appointment->end;
-                $event->doctor = $appointment->doctor;
-                $event->status = $appointment->status;
+            // Insert selected appointment data into the Events table
+            $event = new Event;
+            $event->title = $appointments->title;
+            $event->description = $appointments->description;
+            $event->start = $appointments->start;
+            $event->end = $appointments->end;
+            $event->doctor = $appointments->doctor;
+            $event->status = $appointments->status;
+            $event->save();
 
-                // Save the event to the event table
-                $event->save();
-
-                // Optional: If you want to delete the appointments after inserting them into the event table
-                // Appointment::truncate();
-
-                return back()->with('message', 'Successfully Update', compact('appointments'));
-            }
-        } else {
             return back()->with('message', 'Successfully Update', compact('appointments'));
         }
+
+        $user = User::where('name', $appointments->name)
+            ->where('email', $appointments->email)
+            ->firstOrFail();
+
+        // Sending email notification
+        $message['hi'] = "This is an update from the System - {$user->name}";
+        $message['event'] = "Please click the Link Below to see the Update on your Appointment - {$user->name}";
+        $user->notify(new UpdateNotification($message));
+
         return back()->with('message', 'Successfully Update', compact('appointments'));
     }
 

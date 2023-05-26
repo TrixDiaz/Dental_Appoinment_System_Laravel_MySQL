@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('doctor');
-            $table->string('status')->default('pending');
+            $table->string('status')->default('Pending');
             $table->timestamps();
         });
     }
