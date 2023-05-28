@@ -56,7 +56,7 @@
                 </div>
                 <nav :class="{ 'block': open, 'hidden': !open }"
                     class="flex-grow px-4 pb-4 md:block md:pb-0 md:overflow-y-auto">
-                    <x-admin-link :href="route('admin.index')" :active="request()->routeIs('admin.index')">Appointments</x-admin-link>/
+                    <x-admin-link :href="route('admin.index')" :active="request()->routeIs('admin.index')">Appointments</x-admin-link>
                     <x-admin-link :href="route('admin.dashboard.index')" :active="request()->routeIs('admin.dashboard.index')">Dashboard</x-admin-link>
                     <x-admin-link :href="route('admin.user.index')" :active="request()->routeIs('admin.user.index')">Users</x-admin-link>
 
